@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   ],
   ssr: true,
   pages: true,
+  modules: [
+    '@vueuse/nuxt',
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
