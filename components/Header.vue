@@ -8,22 +8,22 @@
                  <div class="nav-links duration-500 md:min-h-fit  left-0 top-[-100%] md:w-auto flex items-center px-5 md:py-2">
                      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/">首页</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/">首页</NuxtLink>
                          </li>
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/talk">随心说</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/talk">随心说</NuxtLink>
                          </li>
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/article">文章</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/article">文章</NuxtLink>
                          </li>
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/photo-album">相册</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/photo-album">相册</NuxtLink>
                          </li>
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/project">项目</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/project">项目</NuxtLink>
                          </li>
                          <li>
-                             <router-link class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">留言</router-link>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">留言</NuxtLink>
                          </li>
                      </ul>
                  </div>
