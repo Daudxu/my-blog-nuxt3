@@ -1,6 +1,9 @@
 <template>
   <div>
     <!-- <NuxtWelcome /> -->
-    <router-view></router-view>
+    <NuxtLayout>
+      <NuxtLoadingIndicator color="red" />
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
