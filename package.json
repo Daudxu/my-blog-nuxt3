@@ -18,6 +18,8 @@
     "tailwindcss": "^3.3.3"
   },
   "dependencies": {
+    "@dargmuesli/nuxt-cookie-control": "^6.2.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@pinia/nuxt": "^0.4.11",
     "@vee-validate/nuxt": "^4.11.1",
     "@vueuse/nuxt": "^10.3.0",
