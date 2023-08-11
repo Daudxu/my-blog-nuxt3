@@ -1,4 +1,6 @@
 <template>
+       <ClientOnly fallback-tag="span" fallback="Loading comments...">
+
     <header class="flex justify-center items-center fixed w-full z-10 ">
           <div class="flex justify-between items-center 2xl:container md:mx-auto  py-3">
              <div class="cl-logo text-slate-950 mr-1 md:mr-0 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700">
@@ -49,6 +51,7 @@
              </div>
           </div>
       </header>
+    </ClientOnly>
  </template>
  
  <script setup>

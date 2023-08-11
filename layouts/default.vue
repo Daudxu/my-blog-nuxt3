@@ -1,8 +1,9 @@
 <template>
     <div>
       <Header />
-      <main>
-        <slot /> <!-- 插入页面内容 -->
+      <main class="h-screen">
+         <!-- 插入页面内容 -->
+        <slot />
       </main>
       <Footer msg="Footer"/>
     </div>
