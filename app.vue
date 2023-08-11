@@ -2,7 +2,7 @@
   <div>
     <!-- <NuxtWelcome /> -->
     <NuxtLayout>
-      <NuxtLoadingIndicator color="red" />
+      <NuxtLoadingIndicator color="blue"/>
       <NuxtPage />
     </NuxtLayout>
   </div>

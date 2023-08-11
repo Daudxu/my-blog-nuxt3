@@ -31,8 +31,12 @@
   
   <script setup>
 	import Typewriter from 'typewriter-effect/dist/core';
+  import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-    import { ref, onMounted, onBeforeUnmount } from 'vue'
+  definePageMeta({
+    layout: 'no-footer',
+  });
+
 	const typewriterTarget = ref(null)
 	const inMove = ref(false)
     const inMoveDelay =  ref(400)
@@ -150,6 +154,8 @@
 		window.removeEventListener('touchstart', touchStart);
 		window.removeEventListener('touchmove', touchMove);
 	})
+
+  
   </script>
   
   <style scoped>
@@ -163,4 +169,3 @@
 		transform: scale(1.1);
 	}
   </style>
-  
