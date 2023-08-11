@@ -28,6 +28,7 @@
     "@vee-validate/nuxt": "^4.11.1",
     "@vueuse/nuxt": "^10.3.0",
     "crypto-js": "^4.1.1",
-    "three": "^0.155.0"
+    "three": "^0.155.0",
+    "typewriter-effect": "^2.20.1"
   }
 }
