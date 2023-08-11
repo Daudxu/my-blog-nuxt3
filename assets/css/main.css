@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --bg-color: #dff5d6;
+    --text-color: #333333;
+}
+    
+/* Dark Mode 样式 */
+:root.dark {
+    --bg-color: #070707;
+    --text-color: #ffffff;
+}
+    
+/* 应用主题样式 */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}

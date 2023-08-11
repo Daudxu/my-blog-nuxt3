@@ -6,7 +6,7 @@
              <div class="cl-logo text-slate-950 mr-1 md:mr-0 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700">
                  <font-awesome-icon class="text-lime-500 dark:text-blue-400 text-lg mr-2"  icon="user-secret" /><span >Logo</span>
              </div>
-             <nav class="md:flex md:items-center md:mx-2 md:rounded-xl md:shadow-xl dark:text-slate-50 dark:bg-slate-700 min-h-[100vh] md:min-h-0 z-[-1] md:z-auto md:static absolute bg-slate-50 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[65px] transition-all ease-in duration-500" :class="{'opacity-100': isShowNavbar}">
+             <nav class="md:flex md:items-center  md:mx-2 md:rounded-xl md:shadow-xl dark:text-slate-50 dark:bg-slate-700 min-h-[100vh] md:min-h-0 z-[-1] md:z-auto md:static absolute bg-slate-50 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[65px] transition-all ease-in duration-500 block" :class="{'opacity-100': isShowNavbar, '': isShowNavbar}" >
                  <div class="nav-links duration-500 md:min-h-fit  left-0 top-[-100%] md:w-auto flex items-center px-5 md:py-2">
                      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                          <li>
@@ -55,14 +55,17 @@
  </template>
  
  <script setup>
- import { useDark } from '@vueuse/core'
+//  import { useDark } from '@vueuse/core'
  import { ref } from "vue"
+ const online = useOnline()
  const isDark = useDark()
  // const { x, y } = useMouse()
  const isShowNavbar = ref(false)
  
  const toggleIcon = () => {
      isDark.value = !isDark.value;
+     console.log("online", online.value)
+     console.log("isDark", isDark.value)
  }
  
  </script>

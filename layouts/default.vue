@@ -1,7 +1,7 @@
 <template>
     <div>
       <Header />
-      <main class="h-screen">
+      <main class="h-screen flex justify-center">
          <!-- 插入页面内容 -->
         <slot />
       </main>
