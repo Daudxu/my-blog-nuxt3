@@ -27,6 +27,9 @@
                          <li>
                              <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">留言</NuxtLink>
                          </li>
+                         <li>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">实验室</NuxtLink>
+                         </li>
                      </ul>
                  </div>
              </nav>
