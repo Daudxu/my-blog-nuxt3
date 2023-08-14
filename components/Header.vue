@@ -16,10 +16,10 @@
                              <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/talk">随心说</NuxtLink>
                          </li>
                          <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/articles">文章</NuxtLink>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/article">文章</NuxtLink>
                          </li>
                          <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/photo-album">相册</NuxtLink>
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/album">相册</NuxtLink>
                          </li>
                          <li>
                              <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/project">项目</NuxtLink>
