@@ -1,13 +1,18 @@
-import { createServer } from "http";
-import { Server } from "socket.io";
+const { App } = require("uWebSockets.js");
+const { Server } = require("socket.io");
 
-const httpServer = createServer();
-const io = new Server(httpServer, {
-  // options
-});
+const app = App();
+const io = new Server();
+
+io.attachApp(app);
 
 io.on("connection", (socket) => {
-  // ...
+    console.log("===")
 });
 
-httpServer.listen(3000);
+app.listen(3010, (token) => {
+  console.log("token", token)
+  if (!token) {
+    console.warn("port already in use");
+  }
+});

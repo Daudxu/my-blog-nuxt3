@@ -15,7 +15,8 @@
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.6.5",
     "postcss": "^8.4.27",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "unplugin-element-plus": "^0.8.0"
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^6.2.0",
@@ -28,6 +29,7 @@
     "@vee-validate/nuxt": "^4.11.1",
     "@vueuse/nuxt": "^10.3.0",
     "crypto-js": "^4.1.1",
+    "element-plus": "^2.3.9",
     "medium-zoom": "^1.0.8",
     "three": "^0.155.0",
     "typewriter-effect": "^2.20.1"

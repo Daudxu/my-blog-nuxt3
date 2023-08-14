@@ -1,9 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import ElementPlus from 'unplugin-element-plus/vite'
+
 export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css',
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    'element-plus/dist/index.css'
   ],
+  build: {
+    transpile: ['element-plus/es'],
+  },
+  vite: {
+      plugins: [
+          ElementPlus()
+      ],
+  },
   ssr: true,
   pages: true,
   modules: [
