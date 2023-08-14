@@ -55,13 +55,19 @@
     </div>
 </template> 
 
-<script setup>
+<script setup lang="ts">
  import { onMounted } from 'vue';
- import * as THREE from 'three';
  import {
     ElMenu, ElMenuItem, ElSubMenu
 } from "element-plus";
 
+const isCollapse = ref(false)
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
  onMounted(() => {
 
  })

@@ -8,4 +8,5 @@
         "strings": true
     },
     "forceConsistentCasingInFileNames": false,
+    "vue.codeActions.enabled": false,
 }
