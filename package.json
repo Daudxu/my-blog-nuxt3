@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^6.2.0",
+    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/nuxt": "^1.0.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
@@ -28,9 +30,14 @@
     "@pinia/nuxt": "^0.4.11",
     "@vee-validate/nuxt": "^4.11.1",
     "@vueuse/nuxt": "^10.3.0",
+    "cookie-universal-nuxt": "^2.2.2",
     "crypto-js": "^4.1.1",
     "element-plus": "^2.3.9",
     "medium-zoom": "^1.0.8",
+    "pinia": "^2.1.6",
+    "sass": "^1.65.1",
+    "sass-loader": "^13.3.2",
+    "sensitive-word-tool": "^1.1.9",
     "three": "^0.155.0",
     "typewriter-effect": "^2.20.1"
   }

@@ -3,32 +3,15 @@
 
     <header class="flex justify-center items-center fixed w-full z-10 ">
           <div class="flex justify-between items-center 2xl:container md:mx-auto  py-3">
-             <div class="cl-logo text-slate-950 mr-1 md:mr-0 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700">
+             <div class="cl-logo text-slate-950 mr-2 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700">
                  <font-awesome-icon class="text-lime-500 dark:text-blue-400 text-lg mr-2"  icon="user-secret" /><span >Logo</span>
              </div>
-             <nav class="md:flex md:items-center  md:mx-2 md:rounded-xl md:shadow-xl dark:text-slate-50 dark:bg-slate-700 min-h-[100vh] md:min-h-0 z-[-1] md:z-auto md:static absolute bg-slate-50 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[65px] transition-all ease-in duration-500 block" :class="{'opacity-100': isShowNavbar, '': isShowNavbar}" >
+             <!-- <nav class="md:flex md:items-center  md:mx-2 md:rounded-xl md:shadow-xl dark:text-slate-50 dark:bg-slate-700 min-h-[100vh] md:min-h-0  md:z-auto md:static absolute bg-slate-50 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100  -z-10  top-[65px] transition-all ease-in duration-500" :class="{'block': isShowNavbar}" > -->
+             <nav class="md:flex md:items-center mr-2 z-[-1] md:z-auto md:static rounded-xl shadow-xl dark:text-slate-50 dark:bg-slate-700 absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500" ref="navRef" >
                  <div class="nav-links duration-500 md:min-h-fit  left-0 top-[-100%] md:w-auto flex items-center px-5 md:py-2">
                      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/">首页</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/talk">随心说</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/article">文章</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/album">相册</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/project">项目</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">留言</NuxtLink>
-                         </li>
-                         <li>
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" to="/message-board">实验室</NuxtLink>
+                         <li v-for="(item, index) in menuList" :key="index" class="cursor-pointer">
+                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" :to="item.path">{{item.name}}</NuxtLink>
                          </li>
                      </ul>
                  </div>
@@ -47,7 +30,7 @@
                      <!-- moon icon -->
                      <svg v-else @click="toggleIcon" class="fill-current w-8 text-sky-900 dark:text-white cursor-pointer transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
                  </div>
-                 <div class="flex justify-center items-center rounded-xl shadow-xl p-2 bg-slate-50 dark:text-slate-50 dark:bg-slate-700 md:hidden" @click="isShowNavbar = !isShowNavbar">
+                 <div class="flex justify-center items-center rounded-xl shadow-xl p-2 bg-slate-50 dark:text-slate-50 dark:bg-slate-700 md:hidden" @click="Menu(this)" name="menu">
                     <font-awesome-icon v-if="isShowNavbar" :icon="['far', 'circle-xmark']" class="text-2xl cursor-pointer  text-sky-900 dark:text-white"></font-awesome-icon>
                     <font-awesome-icon v-else :icon="['fas', 'bars']" class="text-2xl cursor-pointer  text-sky-900 dark:text-white"></font-awesome-icon>
                  </div>
@@ -60,6 +43,8 @@
  <script setup>
 //  import { useDark } from '@vueuse/core'
  import { ref } from "vue"
+
+ const navRef = ref()
  const online = useOnline()
  const isDark = useDark()
  // const { x, y } = useMouse()
@@ -71,4 +56,18 @@
      console.log("isDark", isDark.value)
  }
  
+ const menuList = ref([
+    {name: "首页", 'path':"/"},
+    {name: "随心说", path:"/talk"},
+    {name: "文章", path:"/article"},
+    {name: "相册", path:"/album"},
+    {name: "项目", path:"/project"},
+    {name: "留言", path:"/message-board"},
+    {name: "实验室", path:"/laboratory"}
+ ])
+
+ const Menu = (e) => {
+    let list = navRef.value;
+    e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') ,isShowNavbar.value = true, list.classList.add('opacity-100')) :( e.name = "menu" ,isShowNavbar.value = false,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
+ }
  </script>

@@ -61,7 +61,7 @@
     ElMenu, ElMenuItem, ElSubMenu
 } from "element-plus";
 
-const isCollapse = ref(false)
+const isCollapse = ref(true)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
