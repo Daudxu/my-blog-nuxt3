@@ -4,15 +4,13 @@
         <!-- <h1 class="text-2xl font-semibold mb-4">留言板</h1> -->
         <div class="w-full  p-6 bg-white rounded-lg shadow-md">
  
-        <form class="mt-4 pb-5">
-            <div class="w-1/2 p-6 bg-white rounded-lg shadow-md">
-                <div class="flex items-center ">
+        <form class="p-6 bg-white rounded-lg shadow-md">
+            <div class="flex items-center justify-between ">
                     <textarea class="w-full h-32 px-4 py-2 mb-2 bg-gray-100 border rounded focus:border-blue-500 focus:ring focus:ring-blue-200 transition resize-none" placeholder="Enter your text..."></textarea>
                 
                         <button class="ml-4 h-32 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Comment</button>
         
                 </div>
-            </div>
         </form>
         <div class="space-y-4">
             <div> 
