@@ -40,5 +40,6 @@
     "sensitive-word-tool": "^1.1.9",
     "three": "^0.155.0",
     "typewriter-effect": "^2.20.1"
-  }
+  },
+  "__npminstall_done": false
 }
