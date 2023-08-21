@@ -23,6 +23,12 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt'
   ],
+  piniaPersistedstate: {
+      cookieOptions: {
+          sameSite: 'strict',
+          maxAge: 86400 * 90
+      }
+  },
   postcss: {
     plugins: {
       tailwindcss: {},

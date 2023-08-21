@@ -5,13 +5,15 @@
             <form class="space-y-6" action="#">
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white text-center">登录</h5>
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">邮箱/用户名</label>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">邮箱/用户名</label>
                     <!-- <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="请输入邮箱或用户名" required> -->
-                    <input type="email" name="email" id="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输入邮箱或用户名" required>
+                    <input type="text" name="username" v-model="username" @input="validateUsername" id="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输入邮箱或用户名" required>
+                    <p v-if="errors.username" class="text-red-500 mt-2">{{ errors.username }}</p>
                 </div>
                 <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">密码</label>
                     <input type="password" name="password" id="password" placeholder="请输入密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
+                    <p v-if="errors.password" class="text-red-500 mt-2">{{ errors.password }}</p>
                 </div>
                 <div class="flex items-start">
                     <div class="flex items-start">
@@ -33,10 +35,40 @@
   </template>
   
   <script setup>
-  const router = useRouter();
-  
-  definePageMeta({
-    layout: 'no-header-footer',
-    index: 1,
-  });
+    import { ref } from 'vue';
+
+    definePageMeta({
+        layout: 'no-header-footer',
+        index: 1,
+    });
+
+    const router = useRouter();
+    const username = ref('');
+    const password = ref('');
+    const errors = ref({});
+    const isSubmitting = ref(false);
+    
+
+    const clearError = (field) => {
+        errors.value[field] = '';
+    };
+
+   
+    const login = () => {
+        isSubmitting.value = true;
+        
+        // Simulate login process
+        setTimeout(() => {
+            if (username.value === 'user' && password.value === 'password') {
+            // Successful login
+            // Redirect or perform other actions
+            } else {
+            // Failed login
+            errors.value.username = 'Invalid credentials';
+            errors.value.password = 'Invalid credentials';
+            isSubmitting.value = false;
+            }
+        }, 1000);
+    };
+
   </script>
