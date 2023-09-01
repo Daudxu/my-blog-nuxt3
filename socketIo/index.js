@@ -1,18 +1,23 @@
-const { App } = require("uWebSockets.js");
-const { Server } = require("socket.io");
+var http = require('http');
+const express = require('express');
+const app = express();
+var server = http.createServer(app);
+server.listen(8081);
 
-const app = App();
-const io = new Server();
+var WebSocketServer = require('ws').Server
+var io = require('socket.io').listen(server);
 
-io.attachApp(app);
+io.set('destroy upgrade', false);
+io.set('transports', ['websocket']);
 
-io.on("connection", (socket) => {
-    console.log("===")
-});
-
-app.listen(3010, (token) => {
-  console.log("token", token)
-  if (!token) {
-    console.warn("port already in use");
-  }
+io.sockets.on('connection', function (socket) {
+    var wss = new WebSocketServer({
+        server: server,
+        path: '/anythingYouWant/' + socket.id
+    });
+    wss.on('connection', function(ws) {
+        ws.on('message', function(message) {
+            console.log(message);
+        });
+    });
 });

@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const useAppStore = defineStore('main', {
+export const useAppStore = defineStore('app', {
   state: () => {
     return {
-      someState: 'hello pinia',
+      sameSite: 'hello pinia',
       userName: 'userName',
     }
-  },
+  }, 
   persist: {
     storage: persistedState.cookiesWithOptions({
         sameSite: 'strict', // 设置 SameSite 属性 

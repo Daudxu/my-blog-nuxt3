@@ -31,9 +31,11 @@
   <script setup>
 	import Typewriter from 'typewriter-effect/dist/core';
   import { ref, onMounted, onBeforeUnmount } from 'vue'
-  // import useArticleStore from '@/stores/useArticleStore'
+  import { useAppStore } from '~~/stores/useAppStore'
   // const userName = useArticleStore().userName
- 
+ const store = useAppStore();
+
+
 
   definePageMeta({
     layout: 'no-footer',
@@ -136,6 +138,8 @@
     }
 
 	onMounted(() => {
+    
+    console.log("useArticleStore", store.someState = 'abc')
 		calculateSectionOffsets();
 		new Typewriter(typewriterTarget.value, {
 			strings: ['Hello, World!', 'Welcome to Vue 3!'],
