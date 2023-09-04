@@ -3,7 +3,9 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
   state: () => {
     return {
-      userName: 'userName',
+      username: '',
+      password: '',
+      rememberMe: false,
       email: 'sdfasdfasf@qq.com',
       token: 'asdfq23rrfsefg23gedfgdcsdf',
       account: 'userName',

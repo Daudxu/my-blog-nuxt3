@@ -37,7 +37,21 @@ export default defineNuxtConfig({
   },
   devtools: {
     enabled: true,
-  }
+  },
+  // buildModules: [
+  //   // 其他模块
+  //   '@nuxt/http',
+  // ],
+  // http: {
+  //   // Axios 配置
+  //   baseURL: 'https://api.example.com', // 你的 API 地址
+  //   credentials: true, // 允许发送跨域认证凭据 (cookies、HTTP 认证)。
+  //   headers: {
+  //     common: {
+  //       'Accept': 'application/json, text/plain, */*',
+  //     },
+  //   },
+  // },
   // app: {
   //   head: {
   //     viewport: 'width=device-width,initial-scale=1',

@@ -6,8 +6,8 @@
 		</div>
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900">
 
-			<h1 ref="typewriterTarget" class="text-3xl font-sans font-bold text-lime-600 ">Vue.js Fullpage Scroll</h1>
-			<p>by <a href="" target="_blank">webdeasy.de</a></p>
+			<h1 ref="typewriterTarget" class="text-3xl font-sans font-bold text-lime-600 ">Vue.js Fullpage Scroll </h1>
+			<p>by <a href="" target="_blank">webdeasy.de </a></p>
 		</section>
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
 			<h1>Section 2</h1>
@@ -32,10 +32,10 @@
 	import Typewriter from 'typewriter-effect/dist/core';
   import { ref, onMounted, onBeforeUnmount } from 'vue'
   import { useAppStore } from '~~/stores/useAppStore'
+  // import { login } from "~~/api/user.ts";
+
   // const userName = useArticleStore().userName
  const store = useAppStore();
-
-
 
   definePageMeta({
     layout: 'no-footer',
@@ -136,9 +136,15 @@
       touchStartY.value = 0;
       return false;
     }
+    // const { data } = await useFetch('/api/hello')
 
-	onMounted(() => {
-    
+const info = ref()
+
+// const { articleApi } = useApi()
+// const sa =  await articleApi.config()
+// info.value = sa 
+// console.log("info" , info.value)
+	onMounted( async () => {
     console.log("useArticleStore", store.someState = 'abc')
 		calculateSectionOffsets();
 		new Typewriter(typewriterTarget.value, {
