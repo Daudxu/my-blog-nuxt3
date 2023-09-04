@@ -96,14 +96,20 @@
    
     const login = async () => {
         isSubmitting.value = true;
-        
         if(!formData.username){
             errors.username = "请输入密码"
         }
 
         if(!formData.password){
-            errors.username = "请输入密码"
+            errors.password = "请输入密码"
         }
+
+        if(isRememberMeChecked.value){
+            store.username = formData.username
+            store.password = encrypt(formData.password) 
+        }
+
+        store.rememberMe = isRememberMeChecked.value
 
         const arr = {
             account: formData.username,
@@ -111,9 +117,13 @@
         }
 
         const res =  await userApi.login(arr)
-        store.rememberMe = isRememberMeChecked.value
+        // const getCommentList = async () => {
+        //     let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
+        // }
 
-        console.log("res", rememberPassword.value)
+        // let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
+        console.log("res", res)
+        // console.log("res", isRememberMeChecked.value)
         
     };
 

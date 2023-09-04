@@ -21,16 +21,17 @@ const fetch = (url: string, options?: any, headers?: any): Promise<any> => {
   const reqUrl = "http://servers.365coding.cn" + url // 你的接口地址
   // console.log(NUXT_PUBLIC_API_MOCK)
   // 不设置key，始终拿到的都是第一个请求的值，参数一样则不会进行第二次请求
-  const key = hash(JSON.stringify(options) + url)
+  // const key = hash(JSON.stringify(options) + url)
  
   // 可以设置默认headers例如
   const customHeaders = { token: useCookie('token').value, ...headers }
  
   return new Promise((resolve, reject) => {
-    useFetch(reqUrl, { ...options, key, headers: customHeaders }).then(({ data, error }) => {
+    useFetch(reqUrl, { ...options, headers: customHeaders }).then(({ data, error }) => {
+      console.log("options", options)
       if (error.value) {
-        reject(error.value)
-        return
+          reject(error.value)
+          return
       }
       // console.log(data)
       const value = data.value
@@ -58,8 +59,8 @@ export default class Http {
     return fetch(url, { method: 'get', params }, headers)
   }
  
-  post (url: string, params?: any, headers?: any): Promise<any> {
-    return fetch(url, { method: 'post', params }, headers)
+  post (url: string, body?: any, headers?: any): Promise<any> {
+    return fetch(url, { method: 'post', body }, headers)
   }
  
   put (url: string, params?: any, headers?: any): Promise<any> {
