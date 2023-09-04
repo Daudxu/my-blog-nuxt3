@@ -113,7 +113,6 @@
         const res =  await userApi.login(arr)
         store.rememberMe = isRememberMeChecked.value
 
-
         console.log("res", rememberPassword.value)
         
     };
