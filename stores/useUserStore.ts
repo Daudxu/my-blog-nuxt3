@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', {
       rememberMe: false,
       token: '',
       email: '',
-      userinfo: ''
+      userinfo: '',
     }
   }, 
   persist: {
