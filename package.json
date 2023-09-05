@@ -9,6 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "latest",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^18.17.3",
@@ -21,7 +22,6 @@
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^6.2.0",
     "@element-plus/icons-vue": "^2.1.0",
-    "@element-plus/nuxt": "^1.0.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
