@@ -1,12 +1,11 @@
-import { hash } from 'ohash'
- 
+import { useUserStore } from '~~/stores/useUserStore'
 // 后端返回的数据类型
 export interface ResOptions<T> {
   data?: T
   code?: number
   msg?: string
 }
- 
+
 /**
  * api请求封装
  * @param { String } url 请求地址
@@ -24,7 +23,9 @@ const fetch = (url: string, options?: any, headers?: any): Promise<any> => {
   // const key = hash(JSON.stringify(options) + url)
  
   // 可以设置默认headers例如
-  const customHeaders = { token: useCookie('token').value, ...headers }
+  // const store = useUserStore();
+  // const customHeaders = { token: useCookie('token').value, ...headers }
+  const customHeaders = { ...headers }
  
   return new Promise((resolve, reject) => {
     useFetch(reqUrl, { ...options, headers: customHeaders }).then(({ data, error }) => {

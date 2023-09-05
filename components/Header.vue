@@ -3,8 +3,8 @@
 
     <header class="flex justify-center items-center fixed w-full z-10 ">
           <div class="flex justify-between items-center 2xl:container md:mx-auto  py-3">
-             <div class="cl-logo text-slate-950 mr-2 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700">
-                 <font-awesome-icon class="text-lime-500 dark:text-blue-400 text-lg mr-2"  icon="user-secret" /><span >Logo</span>
+             <div class="cl-logo w-[60px] h-[40px] text-slate-950 mr-2 font-bold rounded-xl shadow-xl py-2 px-5 flex justify-center items-center dark:text-slate-50 bg-slate-50 dark:bg-slate-700 bg-no-repeat bg-cover bg-center" :style="{ backgroundImage: 'url(' + webConfig.website.pc_logo + ')'}">
+
              </div>
              <!-- <nav class="md:flex md:items-center  md:mx-2 md:rounded-xl md:shadow-xl dark:text-slate-50 dark:bg-slate-700 min-h-[100vh] md:min-h-0  md:z-auto md:static absolute bg-slate-50 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100  -z-10  top-[65px] transition-all ease-in duration-500" :class="{'block': isShowNavbar}" > -->
              <nav class="md:flex md:items-center mr-2 z-[-1] md:z-auto md:static rounded-xl shadow-xl dark:text-slate-50 dark:bg-slate-700 absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500" ref="navRef" >
@@ -54,7 +54,9 @@
  const store = useUserStore();
  // const { x, y } = useMouse()
  const isShowNavbar = ref(false)
- 
+ const { appApi } = useApi()
+ const webConfig = ref('')
+
  const toggleIcon = () => {
      isDark.value = !isDark.value;
      console.log("online", online.value)
@@ -75,4 +77,10 @@
     let list = navRef.value;
     e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') ,isShowNavbar.value = true, list.classList.add('opacity-100')) :( e.name = "menu" ,isShowNavbar.value = false,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
  }
+ const config = await appApi.config()
+    //  console.log("config", config)
+ onMounted( async ()=>{
+    webConfig.value = config.data
+    // console.log("config" ,config)
+ })
  </script>
