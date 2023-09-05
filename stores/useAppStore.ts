@@ -3,12 +3,10 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore('app', {
   state: () => {
     return {
-      someState: 'hello pinia',
+      webConfig: {},
     }
   },
   persist: {
-    storage: persistedState.cookiesWithOptions({
-        sameSite: 'strict',
-    }),
+    storage: persistedState.localStorage
   },
 })

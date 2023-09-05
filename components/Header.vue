@@ -48,10 +48,12 @@
 //  import { useDark } from '@vueuse/core'
  import { ref } from "vue"
  import { useUserStore } from '~~/stores/useUserStore'
+ import { useAppStore } from '~~/stores/useAppStore'
  const navRef = ref()
  const online = useOnline()
  const isDark = useDark()
  const store = useUserStore();
+ const appStore = useAppStore();
  // const { x, y } = useMouse()
  const isShowNavbar = ref(false)
  const { appApi } = useApi()
@@ -81,6 +83,7 @@
     //  console.log("config", config)
  onMounted( async ()=>{
     webConfig.value = config.data
+    appStore.webConfig = config.data
     // console.log("config" ,config)
  })
  </script>
