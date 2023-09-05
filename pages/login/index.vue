@@ -40,7 +40,7 @@
 
     const isRememberMeChecked = ref(false)
     const store = useUserStore();
-    const rememberMe = computed(() => store.rememberMe)
+    // const rememberMe = computed(() => store.rememberMe)
     const { userApi } = useApi()
 
     definePageMeta({
@@ -56,8 +56,8 @@
     });
 
     const formData = reactive({
-        username:'',
-        password:''
+        username:'zhagsan123',
+        password:'zhagsan123'
     })
 
     const isSubmitting = ref(false);
@@ -91,7 +91,12 @@
     }
 
     onMounted(()=>{
-        isRememberMeChecked.value = store.rememberMe.value
+        isRememberMeChecked.value = store.rememberMe
+        if(store.rememberMe) {
+            formData.username = store.username;
+            formData.password = decrypt(store.password);
+        }
+     
     })
    
     const login = async () => {
@@ -107,9 +112,12 @@
         if(isRememberMeChecked.value){
             store.username = formData.username
             store.password = encrypt(formData.password) 
+            store.rememberMe = true
+        }else{
+            store.username = ''
+            store.password = ''
+            store.rememberMe = false
         }
-
-        store.rememberMe = isRememberMeChecked.value
 
         const arr = {
             account: formData.username,
@@ -117,14 +125,20 @@
         }
 
         const res =  await userApi.login(arr)
+        if(res.code === 1) {
+            store.userinfo = res.data
+            store.token = res.data.token
+            router.push('/')
+        }else{
+            alert("error")
+        }
         // const getCommentList = async () => {
         //     let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
         // }
 
         // let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
-        console.log("res", res)
+        // console.log("res", res.data.token)
         // console.log("res", isRememberMeChecked.value)
-        
     };
 
   </script>

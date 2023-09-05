@@ -19,8 +19,12 @@
              <div class="flex items-center gap-3 md:gap-5">
                  <div class="flex justify-center items-center rounded-xl shadow-xl px-5 p-1 dark:text-slate-50 bg-slate-50 dark:bg-slate-700"> 
                      <!-- <a  class="mr-2 p-1">Sign in</a> -->
-                     <div class="w-8 h-8 md:w-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
-                         <font-awesome-icon class="text-lime-500 dark:text-blue-400 text-lg"  icon="user-secret" />
+
+                     <div class="w-8 h-8 md:w-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden" v-if="store.token">
+                         <img :src="store.userinfo.avatar" class="w-[32px] h-[32px] cursor-pointer" />
+                     </div>
+                     <div class="w-8 h-8 md:w-8 flex justify-center items-center" v-else>
+                        <NuxtLink class="" to="/login">登录</NuxtLink>
                      </div>
                  </div>
            
@@ -43,10 +47,11 @@
  <script setup>
 //  import { useDark } from '@vueuse/core'
  import { ref } from "vue"
-
+ import { useUserStore } from '~~/stores/useUserStore'
  const navRef = ref()
  const online = useOnline()
  const isDark = useDark()
+ const store = useUserStore();
  // const { x, y } = useMouse()
  const isShowNavbar = ref(false)
  
