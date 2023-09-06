@@ -2,11 +2,11 @@ import Http from '@/utils/http'
  
 export default new class User extends Http {
  
-  login(data: object) {
+  login(data) {
      return this.post('/api/login/account', data)
   }
 
-  register(data: object) {
+  register(data) {
      return this.post('/api/login/register', data)
   }
 
@@ -14,11 +14,11 @@ export default new class User extends Http {
      return this.get('/api/login/logout')
   }
 
-  resetPassword(data: object) {
+  resetPassword(data) {
      return this.post('/api/user/resetPassword', data)
   }
 
-  sendCode(email: string) {
+  sendCode(email) {
      return this.post('/api/sms/sendCode', email)
   }
 

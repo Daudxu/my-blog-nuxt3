@@ -33,10 +33,10 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
-  // buildModules: [
-  //   // 其他模块
-  //   '@nuxt/http',
-  // ],
+  buildModules: [
+    // 其他模块
+    '@nuxt/http',
+  ],
   // http: {
   //   // Axios 配置
   //   baseURL: 'https://api.example.com', // 你的 API 地址
