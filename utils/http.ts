@@ -36,13 +36,13 @@ const fetch = (url: string, options?: any, headers?: any): Promise<any> => {
       }
       // console.log(data)
       const value = data.value
-      // console.log('useFetchResData: ', value)
+      console.log('useFetchResData: ',reqUrl , options)
       if (!value) {
         // 这里处理错你自定义的错误，例如code !== 1
         throw createError({
           statusCode: 500,
           statusMessage: reqUrl,
-          message: '自己后端接口的报错信息',
+          message: '后端接口的报错信息',
         })
       } else {
         resolve(value)

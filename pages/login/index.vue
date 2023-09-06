@@ -29,7 +29,7 @@
                 </div>
             </form>
         </div>
-
+        
     </div>
   </template>
   
@@ -128,7 +128,10 @@
         if(res.code === 1) {
             store.userinfo = res.data
             store.token = res.data.token
-            router.push('/')
+            if(process.client){
+                router.push('/')
+            }
+      
         }else{
             alert("error")
         }

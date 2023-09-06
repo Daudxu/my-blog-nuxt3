@@ -1,6 +1,6 @@
 <template>
     <div>
-      <slot /> <!-- 插入页面内容 -->
+      <slot /> 
     </div>
   </template>
   
