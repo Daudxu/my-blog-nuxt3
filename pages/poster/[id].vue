@@ -1,87 +1,179 @@
 <template>
     <div class="w-[1024px] mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
-        <div class= "space-y-3 infinite-scroll" ref="scrollContainer" >
-          <div @click="refresh">
-                    123123123
-          </div>
-         <div v-if="pending"> {{ data.data.data.content }}</div>
-          {{ $route.params.id }}
+        <div class= "space-y-3">
+              <div class="my-3">
+                <div class="flex"> 
+                    <div>
+                        <p class="text-gray-800 font-semibold">{{detail.user.nickname}}</p>
+                        <p class="text-gray-800 py-3 flex" v-html="replaceFace(detail.content)"></p>
+                        <p class="text-gray-500 text-sm">{{detail.created_at}}  <span class="text-black cursor-pointer ml-3" @click="showDialog(1, detail.id)">评论</span></p> 
+                         <div v-if="detail.comments.length > 0"> 
+                            <div v-for="(item, index) in detail.comments" :key="index">
+                                <div class="py-3 flex">
+                                    <div class="flex-shrink-0 mr-2">
+                                      <img :src="detail.user.avatar" class="w-[38px] h-[38px]" />
+                                    </div> 
+                                    <div class="m-0">
+                                        <p class="text-gray-800 font-semibold">{{ item.user.nickname }}</p>
+                                        <p v-html="replaceFace(item.content)"></p> 
+                                        <p class="text-gray-500 text-sm">{{ item.created_at }}  <span class="text-black px-1 cursor-pointer" @click="showDialog(2, item.id)">回复</span></p> 
+                                        <div v-if="item.replies.length > 0"> 
+                                            <div v-for="(row, idx) in item.replies" :key="idx">
+                                                  <div class="py-3 flex" v-if="row.parent_reply_id">
+                                                        <div class="flex-shrink-0 mr-2">
+                                                          <img :src="row.user.avatar" class="w-[38px] h-[38px]" />
+                                                        </div> 
+                                                        <div class="m-0">
+                                                            <p class="text-gray-800 font-semibold">{{ row.user.nickname }} 回复了 {{ row.parentReply.user.nickname }}</p>
+                                                            <p v-html="replaceFace(row.content)"></p> 
+                                                            <p class="text-gray-500 text-sm">{{ row.created_at }}  <span class="text-black px-1 cursor-pointer"  @click="showDialog(2, item.id, row.id)">回复</span></p> 
+                                                         
+                                                        </div>
+                                                    </div>
+                                                  <div class="py-3 flex" v-else>
+                                                        <div class="flex-shrink-0 mr-2">
+                                                          <img :src="row.user.avatar" class="w-[38px] h-[38px]" />
+                                                        </div> 
+                                                        <div class="m-0">
+                                                            <p class="text-gray-800 font-semibold">{{ row.user.nickname }}</p>
+                                                            <p v-html="replaceFace(row.content)"></p> 
+                                                            <p class="text-gray-500 text-sm">{{ row.created_at }}  <span class="text-black px-1 cursor-pointer"  @click="showDialog(2, item.id, row.id)">回复</span></p> 
+                                                         
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 border-t"> 
+                         </div>
+                    </div>
+                </div>
+              </div>
         </div>
     </div>
+    <el-dialog v-model="dialogVisible" title="回复" style="min-width: 38%;" draggable>
+        <reply @inputChanged="handleInputChanged" ref="childrenOne" />
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="dialogVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="showChildInputValue"> Confirm </el-button>
+            </span>
+        </template>
+    </el-dialog>
 </template>
 
 <script setup>
 import { useUserStore } from '~~/stores/useUserStore'
+import { useAppStore } from '~~/stores/useAppStore'
 import { replaceFace } from '@/utils/tools'
-const store = useUserStore();
-const route = useRoute()
-// const router = useRouter()
+import Reply from '@/components/Reply.vue'
 
-const avatar = computed(() => store.userinfo.avatar)
+const userStore = useUserStore();
+const appStore = useUserStore();
+const route = useRoute()
+const router = useRouter()
+
+const childrenOne = ref(null)
+const dialogVisible = ref(false)
+const message = ref('')
+
 const { posterApi } = useApi()
 
 const isClient = process.client; // 检查是否在客户端环境
-const isServer = process.server; // 检查是否在服务器端环境
-
-const scrollContainer = ref(null);
+// const isServer = process.server; // 检查是否在服务器端环境
 
 const appConfig = useAppConfig()
+const detail = ref(null)
 
-if(isServer){
-
-  const { data, pending, error, refresh } = await useAsyncData(
-  'mountains',
-  () => posterApi.detail({id:route.params.id})
-  
-  )
-  console.log("===============start================")
-  console.log("data", data.value.data)
-  console.log("===============end==================")
-}
-
-
-
+const { data, pending, error, refresh } = await useAsyncData(
+    () => posterApi.detail({id:route.params.id})
+)
+detail.value = data.value.data
 
 const loadData = async () => {
-  if(isServer) {
-    // asyncData({ params }) {
-    //   const id = params.id; // 获取名为 "id" 的动态参数值
-    // }
-      // console.log("===============start================")
-      // // const arr = {
-      // //   "id": 1
-      // // }
-
-
-
-      // useSeoMeta({
-      //   title: 'My Amazing Site',
-      //   ogTitle: 'My Amazing Site',
-      //   description: 'This is my amazing site, let me tell you all about it.',
-      //   ogDescription: 'This is my amazing site, let me tell you all about it.',
-      //   ogImage: 'https://example.com/image.png',
-      //   twitterCard: 'summary_large_image',
-      // })
-      // // console.log("context.params", context.params)
-      // // const response = await posterApi.detail(arr)
-      
-      // console.log("===============end==================")
-    }
-} 
-
-loadData()
+  if(isClient) {
+    await refresh()
+    detail.value = data.value.data
+  }
+}
  
-//  async asyncData({ params }) {
-//     // 从 params 对象中获取动态参数
-//     const userId = params.id;
+const replyData = reactive({
+    type: null,
+    message_id: null,
+    comment_id: null,
+    parent_reply_id: null
+})
 
-    // 在这里可以使用 userId 进行数据加载或其他服务器端操作
-    // // 例如，根据 userId 获取用户信息
-    // const user = await getUserById(userId);
+const handleInputChanged = (value) => {
+    if (value) {
+        message.value = value
+    }
+}
 
-    // // 将用户数据返回给页面组件
-    // return { user };
-  // },/
+const showChildInputValue = async () => {
+    if (message.value.length > 0) {
+        if (replyData.type === 1) {
+            const newData = {
+                message_id: replyData.message_id,
+                content: message.value
+            }
+            const res = await posterApi.addComments(newData)
+            if(res.code === 1) {
+              dialogVisible.value = false
+              loadData()
+            }else{
+              notificationWarning(res.msg)
+              setTimeout(() => {
+                router.push("/login")
+              }, 2000);
+            }
+   
+        } else {
+            const newData = {
+                comment_id: replyData.comment_id,
+                content: message.value,
+                parent_reply_id: replyData.parent_reply_id
+            }
+            const res =  await posterApi.addReplies(newData)
+            if(res.code === 1) {
+              dialogVisible.value = false
+              loadData()
+            }else{
+              notificationWarning(res.msg)
+              setTimeout(() => {
+                router.push("/login")
+              }, 2000);
+            }
+        }
+        handleClickClearMessage()
+    } else {
+        feedback.msgWarning('输入框不能为空！')
+    }
+}
 
+const showDialog = (type, message_id, parent_reply_id = null) => {
+    replyData.type = type
+    if (type === 1) {
+        replyData.message_id = message_id
+    } else {
+        replyData.comment_id = message_id
+        replyData.parent_reply_id = parent_reply_id
+    }
+    dialogVisible.value = true
+}
+
+const handleClickClearMessage = () => {
+    childrenOne.value.handleClickClearMessage()
+}
+
+const notificationWarning = (msg) => {
+  ElNotification({
+    title: 'Warning',
+    message: msg,
+    type: 'warning',
+  })
+}
 
 </script>

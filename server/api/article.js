@@ -6,24 +6,24 @@ export default new class Article extends Http {
         return this.get('/api/article/cate')
     }
 
-    lists() {
-        return this.get('/api/article/lists')
+    lists(params) {
+        return this.get('/api/article/lists', params)
     }
 
-    detail() {
-        return this.get('/api/article/detail')
+    detail(params) {
+        return this.get('/api/article/detail', params)
     }
 
-    collect() {
-        return this.get('/api/article/collect')
+    collect(params) {
+        return this.get('/api/article/collect', params)
     }
 
-    addCollect() {
-        return this.get('/api/article/addCollect')
+    addCollect(params) {
+        return this.get('/api/article/addCollect', params)
     }
 
-    cancelCollect() {
-        return this.get('/api/article/cancelCollect')
+    cancelCollect(params) {
+        return this.get('/api/article/cancelCollect', params)
     }
 
 }

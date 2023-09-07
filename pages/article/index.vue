@@ -1,74 +1,100 @@
 <template>
-    <div id="scene-container" class="w-[1024px]  mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
+    <div class="w-[1024px]  mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
           
-        <div class="w-full p-6 bg-white rounded-lg shadow-md">
-            <!-- <h1 class="text-2xl font-semibold mb-4">分类与文章列表</h1> -->
-            <div class="mb-4 flex items-center">
-            <input class="flex-grow p-2 border rounded-l-md focus:outline-none focus:border-blue-500" type="text" placeholder="搜索...">
-            <button class="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">搜索</button>
-            </div>
-            <div class="flex">
-            <div class="w-1/4 p-4 bg-white shadow-md rounded-md category-card">
-                <!-- <h2 class="text-lg font-semibold mb-2">分类列表</h2> -->
-                <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    :collapse="isCollapse"
-                    @open="handleOpen"
-                    @close="handleClose"
-                >
-                    <el-sub-menu index="1">
-                    <template #title>
-                        <span>Navigator One</span>
-                    </template>
-                    
-                      <el-menu-item index="1-1">item one</el-menu-item>
-                      <el-menu-item index="1-2">item one</el-menu-item>
-                    </el-sub-menu>
-                    <el-menu-item index="2">
-                   
-                    <template #title>Navigator Two</template>
-                    </el-menu-item>
-                    <el-menu-item index="3" >
-                    <template #title>Navigator Three</template>
-                    </el-menu-item>
-                    <el-menu-item index="4">
-                    <template #title>Navigator Four</template>
-                    </el-menu-item>
-                </el-menu>
-            </div>
-            <div class="w-3/4 p-4 bg-white shadow-md rounded-md ml-4">
-                <ul class="space-y-4">
-                <li class="bg-white p-4 shadow-md rounded-md article-card">
-                    <h2 class="text-lg font-semibold mb-2">文章标题 1</h2>
-                    <p class="text-gray-500 text-sm">5 小时前</p>
-                </li>
-                <li class="bg-white p-4 shadow-md rounded-md article-card">
-                    <h2 class="text-lg font-semibold mb-2">文章标题 2</h2>
-                    <p class="text-gray-500 text-sm">1 天前</p>
-                </li>
-                </ul>
-            </div>
+        <div class="flex justify-center">
+            <div class="max-w-[380px]">
+                <div class="mb-4 flex">
+                    <input class="flex-grow p-2 border rounded-l-md focus:outline-none focus:border-blue-500" type="text" placeholder="">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 ml-3">搜索</button>
+                </div>
+                <div class="mb-4 flex">
+                    <div class="font-sans text-sm flex-shrink-0">热门搜索: </div>
+                    <div class="ml-3 flex flex-wrap  md:flex-row">
+                        <span class="bg-blue-100 mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Default</span>
+                        <span class="bg-gray-100 mb-2 md:mb-0 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Dark</span>
+                        <span class="bg-red-100 mb-2 md:mb-0 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Red</span>
+                        <span class="bg-green-100 mb-2 md:mb-0 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span>
+                        <span class="bg-yellow-100 mb-2 md:mb-0 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Yellow</span>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- ================== -->
+        <div class="flex">
+             <div class="mr-3 flex-shrink-0">
+                <ul>
+                    <li class="p-3 mb-1 bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">全部</li>
+                    <li v-for="(item, index) in resCate.data" :key="index" class="p-3 mb-1  bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">{{item.name}}</li>
+                </ul>
+             </div>
+
+            <div class="w-full">
+                    <div class="grid grid-cols-1  gap-4">
+                        <!-- 第一篇 -->
+                        <div v-for="(item, index) in lists" :key="index"  class="bg-white flex  h-[100px] rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:scale-95">
+                            <img :src="item.image" :alt="item.title" class="w-[100px] h-[100px] object-cover">
+                            <div class="p-4">
+                            <h2 class="text-lg font-sans ">{{ item.title }}</h2>
+                            <p class="text-gray-600">{{ item.desc }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex justify-center items-center my-3">
+                        <el-pagination
+                            small
+                            background
+                            v-model:currentPage="currentPage" 
+                            layout="prev, pager, next"
+                            :total="countPage"
+                            :page-count="totalPages"
+                            @current-change="handleCurrentChange"
+                            class="mt-4"
+                        />
+                    </div>
+            </div>
+        </div>
+        <!-- ================== -->
 
     </div>
 </template> 
 
-<script setup lang="ts">
- import { onMounted } from 'vue';
- import {
-    ElMenu, ElMenuItem, ElSubMenu
-} from "element-plus";
+<script setup>
+ const { articleApi } = useApi()
+ const route = useRoute()
+ const router = useRouter()
+ const lists = ref([])
+ const totalPages = ref(0)
+ const currentPage = ref(1)
+ const countPage = ref(0)
+ const cid = ref('')
+ const pageSize = 1
+ const loading = ref(false)
 
-const isCollapse = ref(true)
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
- onMounted(() => {
+const resCate = await articleApi.cate()
 
- })
+const loadData = async (ctPage) => {
+      currentPage.value = Number(ctPage)
+      loading.value = true
+      const arr = {
+        "page_no": currentPage.value,
+        "page_size": pageSize,
+        "cid": cid.value
+      }
+      const response = await articleApi.lists(arr)
+      totalPages.value = Math.ceil(response.data.count / pageSize)
+      countPage.value = response.data.count
+      lists.value = response.data.lists
+   
+      loading.value = false
+} 
+
+loadData(1)
+
+const handleCurrentChange = (e) => {
+    loadData(e)
+}
+ 
+
 </script>

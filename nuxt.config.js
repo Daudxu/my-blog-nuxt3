@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     'element-plus/dist/index.css',
     'element-plus/theme-chalk/index.css',
     'element-plus/theme-chalk/el-menu-item.css',
+    'vue3-emoji-picker/css',
     '@/assets/css/global.css'
   ],
   ssr: true,

@@ -10,4 +10,12 @@ export default new class Poster extends Http {
         return this.get('/api/poster/detail',params)
     }
 
+    addComments(data) {
+        return this.post('/api/poster/addComments',data)
+    }
+
+    addReplies(data) {
+        return this.post('/api/poster/addReplies',data)
+    }
+
 }

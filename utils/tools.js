@@ -50,7 +50,7 @@ const emojis = [
     { file: '160.gif', code: '/:coffee', title: '咖啡', reg: /\/:coffee/g }
 ]
 
-const replaceFace: any = (con: any) => {
+const replaceFace = (con) => {
     if (con) {
         if (con.includes('/:')) {
             for (var i = 0; i < emojis.length; i++) {

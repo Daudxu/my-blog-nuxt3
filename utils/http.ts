@@ -25,18 +25,25 @@ const fetch = (url: string, options?: any, headers?: any): Promise<any> => {
   // 可以设置默认headers例如
   // const store = useUserStore();
   // const customHeaders = { token: useCookie('token').value, ...headers }
-  const customHeaders = { ...headers }
+  let customHeaders = headers
+  if(process.client){
+    const user:any =  localStorage.getItem("user")
+    customHeaders = { token:  JSON.parse(user)['token'], ...headers }
+
+  }
+
+
  
   return new Promise((resolve, reject) => {
     useFetch(reqUrl, { ...options, headers: customHeaders }).then(({ data, error }) => {
-      console.log("options", options)
+      // console.log("options", options)
       if (error.value) {
           reject(error.value)
           return
       }
       // console.log(data)
       const value = data.value
-      console.log('useFetchResData: ',reqUrl , options)
+      // console.log('useFetchResData: ', value)
       if (!value) {
         // 这里处理错你自定义的错误，例如code !== 1
         throw createError({
