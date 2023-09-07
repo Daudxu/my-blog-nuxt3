@@ -10,11 +10,11 @@
                 <div class="mb-4 flex">
                     <div class="font-sans text-sm flex-shrink-0">热门搜索: </div>
                     <div class="ml-3 flex flex-wrap  md:flex-row">
-                        <span class="bg-blue-100 mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Default</span>
-                        <span class="bg-gray-100 mb-2 md:mb-0 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Dark</span>
-                        <span class="bg-red-100 mb-2 md:mb-0 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Red</span>
-                        <span class="bg-green-100 mb-2 md:mb-0 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span>
-                        <span class="bg-yellow-100 mb-2 md:mb-0 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Yellow</span>
+                        <span class="bg-blue-100 cursor-pointer mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Default</span>
+                        <span class="bg-gray-100 cursor-pointer mb-2 md:mb-0 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Dark</span>
+                        <span class="bg-red-100 cursor-pointer mb-2 md:mb-0 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Red</span>
+                        <span class="bg-green-100 cursor-pointer mb-2 md:mb-0 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span>
+                        <span class="bg-yellow-100 cursor-pointer mb-2 md:mb-0 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Yellow</span>
                     </div>
                 </div>
             </div>
@@ -24,8 +24,8 @@
         <div class="flex">
              <div class="mr-3 flex-shrink-0">
                 <ul>
-                    <li class="p-3 mb-1 bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">全部</li>
-                    <li v-for="(item, index) in resCate.data" :key="index" class="p-3 mb-1  bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">{{item.name}}</li>
+                    <li @click="handleClickCate('')" class="p-3 mb-1 bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">全部</li>
+                    <li  @click="handleClickCate(item.id)" v-for="(item, index) in resCate.data" :key="index" class="p-3 mb-1  bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">{{item.name}}</li>
                 </ul>
              </div>
 
@@ -64,6 +64,7 @@
  const { articleApi } = useApi()
  const route = useRoute()
  const router = useRouter()
+ const title = ref('')
  const lists = ref([])
  const totalPages = ref(0)
  const currentPage = ref(1)
@@ -74,10 +75,12 @@
 
 const resCate = await articleApi.cate()
 
-const loadData = async (ctPage) => {
+const loadData = async (ctPage, cateId) => {
       currentPage.value = Number(ctPage)
+      cid.value = cateId
       loading.value = true
       const arr = {
+        "title": title.value,
         "page_no": currentPage.value,
         "page_size": pageSize,
         "cid": cid.value
@@ -86,15 +89,33 @@ const loadData = async (ctPage) => {
       totalPages.value = Math.ceil(response.data.count / pageSize)
       countPage.value = response.data.count
       lists.value = response.data.lists
-   
+      // 构建要跳转的 URL
+      const routeTo = {
+        path: '?', // 替换为您要跳转的路径
+        query: removeEmptyProperties(arr),
+      };
+      // 使用 router.push 更新 URL，不会刷新页面
+      router.push(routeTo);
       loading.value = false
 } 
+
+const removeEmptyProperties = (obj) =>{
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && (obj[key] === null || obj[key] === "")) {
+      delete obj[key];
+    }
+  }
+  return obj
+}
 
 loadData(1)
 
 const handleCurrentChange = (e) => {
-    loadData(e)
+    loadData(e, cid.value)
 }
- 
+
+const handleClickCate = (e) => {
+    loadData(currentPage.value, e)
+}
 
 </script>
