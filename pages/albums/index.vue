@@ -48,14 +48,14 @@ const pageSize = 9
 const router = useRouter()
 
 const loadData = async (page_no) => {
-  const params = {
-    "page_no": Number(page_no) ? Number(page_no) : 1,
-    "page_size": pageSize,
-  }
-  const { data } =  await albumsApi.lists(params)
-  lists.value = data.lists
-  countPage.value = data.count
-  currentPage.value = data.page_no
+    const params = {
+        "page_no": Number(page_no) ? Number(page_no) : 1,
+        "page_size": pageSize,
+    }
+    const { data } =  await albumsApi.lists(params)
+    lists.value = data.lists
+    countPage.value = data.count
+    currentPage.value = data.page_no
 }
 
 loadData(1)
@@ -67,6 +67,4 @@ const handleClickDetail = (id)=> {
 const handleCurrentChange = (id)=> {
   loadData(id)
 }
-
-
 </script>
