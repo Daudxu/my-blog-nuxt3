@@ -158,7 +158,6 @@ const updateCurrentPage = (e) => {
 };
 
 const handleClickDetail = (id)=> {
-    nextTick()
     router.push({ name: 'article-id', params: { id } });
   }
 

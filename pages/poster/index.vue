@@ -95,8 +95,7 @@ const loadData = async () => {
   }
 
   const handleClickDetail = (id)=> {
-      router.push({ path: "/poster/"+id
-      })
+      router.push({ path: "/poster/"+id })
   }
 
   onMounted(async ()=>{

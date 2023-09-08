@@ -18,17 +18,17 @@
                   </div>
                   
                   <div class="flex justify-center items-center my-3" >
-                              <el-pagination 
-                                  small
-                                  background
-                                  v-model:currentPage="currentPage" 
-                                  :page-size ="pageSize"
-                                  layout="prev, pager, next"
-                                  :total="countPage"
-                                  :page-count="totalPages"
-                                  @current-change="handleCurrentChange"
-                                  class="mt-4"
-                              />
+                          <el-pagination 
+                              small
+                              background
+                              v-model:currentPage="currentPage" 
+                              :page-size ="pageSize"
+                              layout="prev, pager, next"
+                              :total="countPage"
+                              :page-count="totalPages"
+                              @current-change="handleCurrentChange"
+                              class="mt-4"
+                          />
                   </div>
             </div>
             <el-empty v-else description="no data" />
@@ -56,8 +56,6 @@ const loadData = async (page_no) => {
   lists.value = data.lists
   countPage.value = data.count
   currentPage.value = data.page_no
-
-  console.log(countPage.value)
 }
 
 loadData(1)
