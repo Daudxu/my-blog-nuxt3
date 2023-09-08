@@ -11,7 +11,7 @@ export default new class Article extends Http {
     }
 
     detail(params) {
-        return this.get('/api/article/detail', params)
+        return this.get('/api/article/commentsDetail', params)
     }
 
     collect(params) {
@@ -24,6 +24,14 @@ export default new class Article extends Http {
 
     cancelCollect(params) {
         return this.get('/api/article/cancelCollect', params)
+    }
+
+    addComments (params) {
+        return this.post('/api/article/addComments ', params)
+    }
+
+    addReplies (params) {
+        return this.post('/api/article/addReplies', params)
     }
 
 }

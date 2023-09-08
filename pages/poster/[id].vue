@@ -15,7 +15,7 @@
                                     </div> 
                                     <div class="m-0">
                                         <p class="text-gray-800 font-semibold">{{ item.user.nickname }}</p>
-                                        <p v-html="replaceFace(item.content)"></p> 
+                                        <p class="flex" v-html="replaceFace(item.content)"></p> 
                                         <p class="text-gray-500 text-sm">{{ item.created_at }}  <span class="text-black px-1 cursor-pointer" @click="showDialog(2, item.id)">回复</span></p> 
                                         <div v-if="item.replies.length > 0"> 
                                             <div v-for="(row, idx) in item.replies" :key="idx">
@@ -25,7 +25,7 @@
                                                         </div> 
                                                         <div class="m-0">
                                                             <p class="text-gray-800 font-semibold">{{ row.user.nickname }} 回复了 {{ row.parentReply.user.nickname }}</p>
-                                                            <p v-html="replaceFace(row.content)"></p> 
+                                                            <p class="flex" v-html="replaceFace(row.content)"></p> 
                                                             <p class="text-gray-500 text-sm">{{ row.created_at }}  <span class="text-black px-1 cursor-pointer"  @click="showDialog(2, item.id, row.id)">回复</span></p> 
                                                          
                                                         </div>
@@ -36,7 +36,7 @@
                                                         </div> 
                                                         <div class="m-0">
                                                             <p class="text-gray-800 font-semibold">{{ row.user.nickname }}</p>
-                                                            <p v-html="replaceFace(row.content)"></p> 
+                                                            <p class="flex" v-html="replaceFace(row.content)"></p> 
                                                             <p class="text-gray-500 text-sm">{{ row.created_at }}  <span class="text-black px-1 cursor-pointer"  @click="showDialog(2, item.id, row.id)">回复</span></p> 
                                                          
                                                         </div>
