@@ -63,6 +63,7 @@
 </style>
 <script setup>
 import { ref } from 'vue'
+const { messageBoardApi } = useApi()
 // import { Message, Search, Star} from "@element-plus/icons-vue";
 const isLoading = ref(false)
 const isShowEmjoi = ref(false)

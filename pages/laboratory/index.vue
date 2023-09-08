@@ -19,6 +19,7 @@
 </template>     
 
 <script setup>
+const { laboratoryApi } = useApi()
 const albums =  [
         {
           title: '相册 1',

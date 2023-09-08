@@ -1,5 +1,5 @@
 <template>
-       <ClientOnly fallback-tag="span" fallback="Loading comments...">
+    <ClientOnly fallback-tag="span" fallback="Loading comments...">
 
     <header class="flex justify-center items-center fixed w-full z-10 ">
           <div class="flex justify-between items-center 2xl:container md:mx-auto  py-3">
@@ -11,7 +11,7 @@
                  <div class="nav-links duration-500 md:min-h-fit  left-0 top-[-100%] md:w-auto flex items-center px-5 md:py-2">
                      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                          <li v-for="(item, index) in menuList" :key="index" class="cursor-pointer">
-                             <NuxtLink class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" :to="item.path">{{item.name}}</NuxtLink>
+                             <NuxtLink @click="Menu" class="text-black dark:text-white dark:hover:text-gray-500 hover:text-gray-500" :to="item.path">{{item.name}}</NuxtLink>
                          </li>
                      </ul>
                  </div>
@@ -34,7 +34,7 @@
                      <!-- moon icon -->
                      <svg v-else @click="toggleIcon" class="fill-current w-8 text-sky-900 dark:text-white cursor-pointer transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
                  </div>
-                 <div class="flex justify-center items-center rounded-xl shadow-xl p-2 bg-slate-50 dark:text-slate-50 dark:bg-slate-700 md:hidden" @click="Menu(this)" name="menu">
+                 <div class="flex justify-center items-center rounded-xl shadow-xl p-2 bg-slate-50 dark:text-slate-50 dark:bg-slate-700 md:hidden" ref="menuRef" @click="Menu()" name="menu">
                     <font-awesome-icon v-if="isShowNavbar" :icon="['far', 'circle-xmark']" class="text-2xl cursor-pointer  text-sky-900 dark:text-white"></font-awesome-icon>
                     <font-awesome-icon v-else :icon="['fas', 'bars']" class="text-2xl cursor-pointer  text-sky-900 dark:text-white"></font-awesome-icon>
                  </div>
@@ -50,6 +50,7 @@
  import { useUserStore } from '~~/stores/useUserStore'
  import { useAppStore } from '~~/stores/useAppStore'
  const navRef = ref()
+ const menuRef = ref()
  const online = useOnline()
  const isDark = useDark()
  const store = useUserStore();
@@ -69,16 +70,19 @@
     {name: "首页", 'path':"/"},
     {name: "随心说", path:"/poster"},
     {name: "文章", path:"/article"},
-    {name: "相册", path:"/album"},
-    {name: "项目", path:"/project"},
+    {name: "相册", path:"/albums"},
+    {name: "项目", path:"/projects"},
     {name: "留言", path:"/message-board"},
     {name: "实验室", path:"/laboratory"}
  ])
 
- const Menu = (e) => {
+ const Menu = () => {
     let list = navRef.value;
+    let e = menuRef.value;
     e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') ,isShowNavbar.value = true, list.classList.add('opacity-100')) :( e.name = "menu" ,isShowNavbar.value = false,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
  }
+
+
  const config = await appApi.config()
     //  console.log("config", config)
  onMounted( async ()=>{

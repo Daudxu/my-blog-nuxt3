@@ -41,8 +41,8 @@
                         </div>
 
                     </div>
-                    <div class="flex justify-center items-center my-3">
-                        <el-pagination
+                    <div class="flex justify-center items-center my-3" v-if="totalPages > 1">
+                        <el-pagination 
                             small
                             background
                             v-model:currentPage="currentPage" 
