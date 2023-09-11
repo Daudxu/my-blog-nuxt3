@@ -56,6 +56,7 @@ const { data } =  await laboratoryApi.lists(params)
     lists.value = data.lists
     countPage.value = data.count
     currentPage.value = data.page_no
+    totalPages.value = Math.ceil(data.count / pageSize)
 }
 
 loadData(1)

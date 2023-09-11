@@ -7,7 +7,7 @@ export default new class Projects extends Http {
     }
 
     detail(params) {
-        return this.get('/api/projects/commentsDetail', params)
+        return this.get('/api/projects/detail', params)
     }
 
 }
