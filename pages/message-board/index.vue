@@ -115,7 +115,7 @@
         </div>
     </div>
     <ClientOnly>
-        <el-dialog v-model="dialogVisible" title="回复" custom-class="cl-dialog"  draggable>
+        <el-dialog v-model="dialogVisible" title="回复" custom-class="cl-dialog" draggable>
             <reply @inputChanged="handleInputChanged" ref="childrenOne" />
             <template #footer>
                 <span class="dialog-footer">
@@ -160,14 +160,11 @@ const loadData = async (page_no) => {
 }
 
 
-if(lists.value.length === 0){
-    // const params = {
-    //     "page_no": Number(page_no) ? Number(page_no) : 1,
-    //     "page_size": pageSize,
-    // }
-    // const { data } = await useAsyncData("lists", async () => await messageBoardApi.lists(params))
-   
-    const { data, pending, error, refresh } = await useAsyncData( () => messageBoardApi.lists())
+if(lists.value.length === 0){   
+    const { data, pending, error, refresh } = await useAsyncData( () => messageBoardApi.lists( {
+        "page_no":  1,
+        "page_size": pageSize,
+    }))
     lists.value = data.value.data.lists
     // console.log('server', data.value.data.lists)
 }
