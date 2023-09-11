@@ -34,7 +34,7 @@
             </div>
      
             <div class="space-y-4">
-                <div class="pb-1" v-for="(item, index) in lists"  :key="index+item.id"> 
+                <div class="pb-1" v-for="(item, index) in lists"  :key="index"> 
                     <div class="my-3">
                         <div class="flex space-x-4 "> 
                             <div class="flex-shrink-0 mr-2">
@@ -42,7 +42,7 @@
                             </div> 
                             <div class="flex flex-col">
                                 <p class="text-gray-800 text-xs font-sans max-w-xs overflow-hidden">{{item.user.nickname}}</p>
-                                <p class="text-gray-800 py-3 flex" v-html="replaceFace(item.content)"></p>
+                                <p class="text-gray-800 py-3 flex" v-if="isClient" v-html="replaceFace(item.content)"></p>
                                 <p class="text-gray-500 text-sm">2 小时前  <span class="text-black cursor-pointer ml-3" @click="showDialog(1, item.id)">回复</span></p> 
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                         </div> 
                                         <div class="m-0">
                                             <p class="text-gray-800 text-xs font-sans max-w-xs overflow-hidden">{{row.user.nickname}}</p>
-                                            <p class="text-gray-800 py-3 flex" v-html="replaceFace(row.content)"></p> 
+                                            <p class="text-gray-800 py-3 flex" v-if="isClient" v-html="replaceFace(row.content)"></p> 
                                             <!-- ===================== -->
                                             <p class="text-gray-500 text-sm">{{ row.created_at }}  <span class="text-black px-1 cursor-pointer" @click="showDialog(2, row.id)">回复</span></p> 
                                             <div v-if="row.replies.length > 0"> 
@@ -70,6 +70,7 @@
                                                                 <p class="text-gray-800 text-xs font-sans max-w-xs overflow-hidden">{{ vo.user.nickname }} 回复了 {{ vo.parentReply.user.nickname }}</p>
                                                                 <p class="flex" v-html="replaceFace(vo.content)"></p> 
                                                                 <p class="text-gray-500 text-sm">{{ vo.created_at }}  <span class="text-black px-1 cursor-pointer"  @click="showDialog(2, row.id, vo.id)">回复</span></p> 
+                                                            
                                                             </div>
                                                         </div> 
                                                     <div class="py-3 flex" v-else>
@@ -95,7 +96,7 @@
                         <hr class="my-2 border-t"> 
                     </div>
                 </div>
-                <ClientOnly>
+
                 <div class="flex justify-center items-center my-3" >
                           <el-pagination 
                               small
@@ -109,23 +110,19 @@
                               class="mt-4"
                           />
                   </div>
-                </ClientOnly>
             </div>
 
         </div>
     </div>
-    <ClientOnly>
-        <el-dialog v-model="dialogVisible" title="回复" custom-class="cl-dialog"  draggable>
-            <reply @inputChanged="handleInputChanged" ref="childrenOne" />
-            <template #footer>
-                <span class="dialog-footer">
-                    <el-button @click="dialogVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="showChildInputValue"> Confirm </el-button>
-                </span>
-            </template>
-        </el-dialog>
-        
-    </ClientOnly>
+    <el-dialog v-model="dialogVisible" title="回复" style="min-width: 38%;" draggable>
+        <reply @inputChanged="handleInputChanged" ref="childrenOne" />
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="dialogVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="showChildInputValue"> Confirm </el-button>
+            </span>
+        </template>
+    </el-dialog>
 </template>
 <script setup>
 import { emojis, replaceFace} from '@/utils/tools'
@@ -159,19 +156,7 @@ const loadData = async (page_no) => {
     currentPage.value = data.page_no
 }
 
-
-if(lists.value.length === 0){
-    // const params = {
-    //     "page_no": Number(page_no) ? Number(page_no) : 1,
-    //     "page_size": pageSize,
-    // }
-    // const { data } = await useAsyncData("lists", async () => await messageBoardApi.lists(params))
-   
-    const { data, pending, error, refresh } = await useAsyncData( () => messageBoardApi.lists())
-    lists.value = data.value.data.lists
-    // console.log('server', data.value.data.lists)
-}
-// loadData(1)
+loadData(1)
 
 const handleCurrentChange = (id)=> {
   loadData(id)
@@ -291,11 +276,7 @@ const showChildInputValue = async () => {
         }
         handleClickClearMessage() 
     } else {
-        ElMessage({
-            showClose: true,
-            message: '请输入内容',
-            type: 'warning',
-        })
+        feedback.msgWarning('输入框不能为空！')
     }
 }
 
@@ -322,19 +303,3 @@ const notificationWarning = (msg) => {
   })
 }
 </script>
-<style>
-.sa{
-    width: 90%
-}
-
-@media screen and (max-width: 768px) {
-    .cl-dialog{
-        width: 90%
-    }
-}
-@media screen and (min-width: 1200px) {
-    .cl-dialog{
-        width: 30%
-    }
-}
-</style>
