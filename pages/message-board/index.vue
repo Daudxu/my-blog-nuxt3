@@ -319,6 +319,7 @@ const notificationWarning = (msg) => {
   })
 }
 </script>
+
 <style>
 .sa{
     width: 90%
