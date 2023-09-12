@@ -330,6 +330,7 @@ const notificationWarning = (msg) => {
         width: 90%
     }
 }
+
 @media screen and (min-width: 1200px) {
     .cl-dialog{
         width: 30%

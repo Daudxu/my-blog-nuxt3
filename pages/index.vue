@@ -4,49 +4,110 @@
 			<span class="menu-point w-3 h-3 bg-white block my-4 opacity-60 transition duration-400 ease-in-out cursor-pointer" v-bind:class="{active: activeSection == index}" v-on:click="scrollToSection(index)" v-for="(offset, index) in offsets" v-bind:key="index" >
 			</span>
 		</div>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900">
+		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900 bg-01">
 
-			<h1 ref="typewriterTarget" class="text-3xl font-sans font-bold text-lime-600 ">Vue.js Fullpage Scroll </h1>
-			<p>by <a href="" target="_blank">webdeasy.de </a></p>
+      <div class="container mx-auto p-4">
+          <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center justify-center">
+       
+                <div class="space-y-3">
+                <!-- ---------------------------- -->
+                <h1 class="text-2xl font-sans font-bold">👨🏻‍💻 About Me </h1>
+                <div class="space-y-3" v-html="homeData.about_content"></div>
+                <!-- <ul class="flex space-x-3">
+                  <li class="">
+                      <a href="" title="github" target="_blank">
+                        <img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=plastic&logo=gmail&logoColor=white" height="25px" alt="Email">
+                          <span class="label">github</span>
+                      </a>
+                  </li>
+                </ul> -->
+               </div>
+            </div>
+            <div class="p-4">
+              <img :src="homeData.about_image" class="rounded-2xl" />
+            </div>
+          </div>
+      </div>
+
 		</section>
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
-			<h1>Section 2</h1>
-			<p>made with <a href="" target="_blank">Vue.js</a></p>
+        <div class="container mx-auto p-4">
+            <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- -------------------------------------- -->
+                <div class="p-4">
+                  <img :src="homeData.skills_image" class="rounded-2xl" />
+                </div>
+                <div class="flex items-center justify-center"> 
+                  <div class="space-y-3">
+                      <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
+                      <ul class="space-y-3">
+                        <li> Hi, I'm Dane👋。 </li>
+                        <li class="flex items-center space-x-3 "> 
+                          <div>💻</div>
+                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>
+                        </li>
+                        <li class="flex items-center space-x-3 "> 
+                          <div>🌐</div>
+                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/languages/js.svg" />
+                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/frameworks/react.svg" />
+                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/frameworks/vue.svg" />
+                          <!-- <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>   -->
+                        </li>
+                        <li class="flex items-center space-x-3 "> 
+                          <div>🛢</div>
+                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>  
+                        </li>
+                        <li class="flex items-center space-x-3 "> 
+                          <div>🔧</div>
+                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>  
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+                 <!-- -------------------------------------- -->
+            </div>
+       </div>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-red-600 dark:bg-red-900">
-			<h1>Section 3</h1>
-			<p>works on <span><b>desktop & mobile</b></span> devices</p>
+		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
+      <h1>项目展示</h1>
+      <div>
+        <div class="block text-center" >
+          <!-- <ClientOnly> -->
+            <el-carousel :interval="4000" type="card" class="h-[200px] w-[560px] md:h-[300px] md:w-[800px]">
+              <el-carousel-item v-for="item in 6" :key="item">
+                <h3 text="2xl" justify="center">{{ item }}</h3>
+              </el-carousel-item>
+            </el-carousel>
+          <!-- </ClientOnly> -->
+        </div>
+      </div>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-green-500 dark:bg-green-900">
-			<h1>Section 4</h1>
-			<p>tested in all <span><b>modern browsers</b></span></p>
-		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-cyan-600 dark:bg-cyan-900">
+		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
 			<h1>Section 5</h1>
 			<p>check the tutorial <a href="" target="_blank">here</a></p>
 		</section>
 	</div>
   </template>
   
-  <script setup>
+  <script setup>  
 	import Typewriter from 'typewriter-effect/dist/core';
-  import { ref, onMounted, onBeforeUnmount } from 'vue'
   import { useAppStore } from '~~/stores/useAppStore'
-  // import { login } from "~~/api/user.ts";
-
-  // const userName = useArticleStore().userName
- const store = useAppStore();
 
   definePageMeta({
     layout: 'no-footer',
   });
 
+  const { appApi } = useApi()
+  const store = useAppStore();
 	const typewriterTarget = ref(null)
 	const inMove = ref(false)
   const inMoveDelay =  ref(400)
 	const activeSection = ref(0)
 	const offsets = ref([])
-    const touchStartY = ref(0)
+  const touchStartY = ref(0)
+  const homeData = ref('')
+
 	const calculateSectionOffsets = () => {
       let sections = document.getElementsByTagName('section');
       let length = sections.length;
@@ -81,21 +142,21 @@
     }
     
 	 const moveDown = () => {
-	  inMove.value = true;
-      activeSection.value--;
-        
-      if(activeSection.value < 0) activeSection.value = offsets.value.length - 1;
-        
-      scrollToSection(activeSection.value, true);
+      inMove.value = true;
+        activeSection.value--;
+          
+        if(activeSection.value < 0) activeSection.value = offsets.value.length - 1;
+          
+        scrollToSection(activeSection.value, true);
     }
     
 	 const moveUp = () => {
-	  inMove.value = true;
-      activeSection.value++;
-        
-      if(activeSection.value > offsets.value.length - 1) activeSection.value = 0;
-        
-      scrollToSection(activeSection.value, true);
+      inMove.value = true;
+        activeSection.value++;
+          
+        if(activeSection.value > offsets.value.length - 1) activeSection.value = 0;
+          
+        scrollToSection(activeSection.value, true);
     }
 
 	 const scrollToSection = (id, force = false) => {
@@ -136,14 +197,6 @@
       touchStartY.value = 0;
       return false;
     }
-    // const { data } = await useFetch('/api/hello')
-
-const info = ref()
-
-// const { articleApi } = useApi()
-// const sa =  await articleApi.config()
-// info.value = sa 
-// console.log("info" , info.value)
 	onMounted( async () => {
     console.log("useArticleStore", store.someState = 'abc')
 		calculateSectionOffsets();
@@ -161,12 +214,14 @@ const info = ref()
 	onBeforeUnmount(() => {
 		window.removeEventListener('DOMMouseScroll', handleMouseWheelDOM);
 		window.removeEventListener('mousewheel', handleMouseWheel, { passive: false });
-		
 		window.removeEventListener('touchstart', touchStart);
 		window.removeEventListener('touchmove', touchMove);
 	})
 
-  
+
+  const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
+  homeData.value = data.value.data
+
   </script>
   
   <style scoped>
@@ -179,4 +234,32 @@ const info = ref()
 		opacity: 1;
 		transform: scale(1.1);
 	}
+
+  .bg-01 {
+    background: url('../assets/images/h-bg.jpg') no-repeat;
+    background-size: cover;
+  }
+
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+  text-align: center;
+}
+
+/* .el-carousel__indicators--horizontal{
+  width: 100%;
+} */
+
+.el-carousel__container ul{
+  width: 100%;
+}
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
   </style>
