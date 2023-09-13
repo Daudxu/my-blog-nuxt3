@@ -4,7 +4,7 @@
 			<span class="menu-point w-3 h-3 bg-white block my-4 opacity-60 transition duration-400 ease-in-out cursor-pointer" v-bind:class="{active: activeSection == index}" v-on:click="scrollToSection(index)" v-for="(offset, index) in offsets" v-bind:key="index" >
 			</span>
 		</div>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900 bg-01">
+		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900 ">
 
       <div class="container mx-auto p-4">
           <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
@@ -12,16 +12,16 @@
        
                 <div class="space-y-3">
                 <!-- ---------------------------- -->
-                <h1 class="text-2xl font-sans font-bold">👨🏻‍💻 About Me </h1>
+                <h1 class="text-2xl font-sans font-bold" ref="typewriterTarget">Hey 👋, I'm Dan</h1>
+                <p class="text-xl font-semibold">I am Uyghur, which is a minority in China. Now I am studying medical imaging at HUST.</p>
                 <div class="space-y-3" v-html="homeData.about_content"></div>
-                <!-- <ul class="flex space-x-3">
+                <ul class="flex space-x-3">
                   <li class="">
                       <a href="" title="github" target="_blank">
                         <img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=plastic&logo=gmail&logoColor=white" height="25px" alt="Email">
-                          <span class="label">github</span>
                       </a>
                   </li>
-                </ul> -->
+                </ul>
                </div>
             </div>
             <div class="p-4">
@@ -43,8 +43,8 @@
                       <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
                       <ul class="space-y-3 w-full">
                         <li class="flex items-center flex-row flex-wrap" v-for="(item, index) in homeData.group_skills" :key="index"> 
-                          <div class="text-2xl">{{ item.icon }}</div>
-                          <img v-for="(row, idx) in item.skills" :src="row.badge"  :key="idx" class="m-2 rounded-lg hover:shadow-xl" />
+                          <div class="md:text-2xl">{{ item.icon }}</div>
+                          <img v-for="(row, idx) in item.skills" :src="row.badge"  :key="idx" class="m-2 rounded-lg hover:shadow-xl h-5 md:h-7" />
                         </li>
                       </ul>
                     </div>
@@ -182,12 +182,13 @@
       
       touchStartY.value = 0;
       return false;
-    }
+  }
+
 	onMounted( async () => {
     console.log("useArticleStore", store.someState = 'abc')
 		calculateSectionOffsets();
 		new Typewriter(typewriterTarget.value, {
-			strings: ['Hello, World!', 'Welcome to Vue 3!'],
+			strings: ["Hey 👋, I'm Dan", "Welcome to my website!"],
 			autoStart: true,
 			loop: true,
 		});
