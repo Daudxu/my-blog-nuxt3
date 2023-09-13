@@ -74,8 +74,8 @@
       <div>
         <div class="block text-center" >
           <!-- <ClientOnly> -->
-            <el-carousel :interval="4000" type="card" class="h-[200px] w-[560px] md:h-[300px] md:w-[800px]">
-              <el-carousel-item v-for="item in 6" :key="item">
+            <el-carousel :interval="4000" type="card" class="h-[200px] w-[300px] md:h-[300px] md:w-[800px]">
+              <el-carousel-item v-for="item in 6" :key="item" class="w-full">
                 <h3 text="2xl" justify="center">{{ item }}</h3>
               </el-carousel-item>
             </el-carousel>
@@ -219,8 +219,8 @@
 	})
 
 
-  const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
-  homeData.value = data.value.data
+  // const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
+  // homeData.value = data.value.data
 
   </script>
   
