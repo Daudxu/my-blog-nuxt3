@@ -41,13 +41,13 @@
                 <div class="flex items-center justify-center"> 
                   <div class="space-y-3">
                       <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
-                      <ul class="space-y-3">
+                      <ul class="space-y-3 w-full">
                         <li> Hi, I'm Dane👋。 </li>
                         <li class="flex items-center space-x-3 "> 
                           <div>💻</div>
                           <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>
                         </li>
-                        <li class="flex items-center space-x-3 "> 
+                        <li class="flex items-center space-x-3 overflow-wrap break-word"> 
                           <div>🌐</div>
                           <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/languages/js.svg" />
                           <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/frameworks/react.svg" />
@@ -70,13 +70,15 @@
        </div>
 		</section>
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
-      <h1>项目展示</h1>
+      <h1 class="py-7 text-2xl font-sans font-bold">项目展示</h1>
       <div>
         <div class="block text-center" >
           <!-- <ClientOnly> -->
-            <el-carousel :interval="4000" type="card" class="h-[200px] w-[300px] md:h-[300px] md:w-[800px]">
-              <el-carousel-item v-for="item in 6" :key="item" class="w-full">
-                <h3 text="2xl" justify="center">{{ item }}</h3>
+            <el-carousel :interval="4000" type="card" class="w-[365px] sm:w-[500px] md:h-[300px] md:w-[800px] ">
+              <el-carousel-item v-for="item in homeData.projects" :key="item" class="w-full rounded-2xl shadow-xl group" :style="{ backgroundImage: `url('${item.image}')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }">
+                <div class="bg-slate-800/70 font-sans text-slate-50 h-full w-full hidden  group-hover:block" >
+                    <h3 class="h-full w-full flex items-center justify-center"> {{ item.title }} </h3> 
+                </div>
               </el-carousel-item>
             </el-carousel>
           <!-- </ClientOnly> -->
@@ -219,8 +221,8 @@
 	})
 
 
-  // const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
-  // homeData.value = data.value.data
+  const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
+  homeData.value = data.value.data
 
   </script>
   
@@ -240,26 +242,4 @@
     background-size: cover;
   }
 
-.el-carousel__item h3 {
-  color: #475669;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
-  text-align: center;
-}
-
-/* .el-carousel__indicators--horizontal{
-  width: 100%;
-} */
-
-.el-carousel__container ul{
-  width: 100%;
-}
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
   </style>
