@@ -4,10 +4,10 @@
 			<span class="menu-point w-3 h-3 bg-white block my-4 opacity-60 transition duration-400 ease-in-out cursor-pointer" v-bind:class="{active: activeSection == index}" v-on:click="scrollToSection(index)" v-for="(offset, index) in offsets" v-bind:key="index" >
 			</span>
 		</div>
-		<section class="h-screen w-full flex justify-center items-center flex-col">
+		<section class="h-screen w-full flex justify-center items-center flex-col overflow-hidden">
             <about-section :homeData="homeData"></about-section>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col relative bg-01">
+		<section class="h-screen w-full flex justify-center items-center flex-col relative bg-02">
         <div class="container mx-auto p-4">
             <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
               <!-- -------------------------------------- -->
@@ -29,7 +29,7 @@
             </div>
        </div>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
+		<section class="h-screen w-full flex justify-center items-center flex-col bg-03">
       <h1 class="py-7 text-2xl font-sans font-bold">项目展示</h1>
       <div>
         <div class="block text-center" >
@@ -46,8 +46,7 @@
       </div>
 		</section>
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
-			<h1>Section 5</h1>
-			<p>check the tutorial <a href="" target="_blank">here</a></p>
+        <laboratory></laboratory>
 		</section>
 	</div>
   </template>
@@ -55,6 +54,7 @@
   <script setup>  
   // import { useAppStore } from '~~/stores/useAppStore';
   import AboutSection from '~~/pages/components/AboutSection'
+  import Laboratory from '~~/pages/components/Laboratory'
 
   definePageMeta({
     layout: 'no-footer',
@@ -195,8 +195,16 @@
 		transform: scale(1.1);
 	}
 
-  .bg-01 {
+  /* .bg-01 {
     background: url('../assets/images/h-bg.jpg') no-repeat;
+    background-size: cover;
+  } */
+  .bg-02 {
+    background: url('../assets/images/page2.jpg') no-repeat;
+    background-size: cover;
+  }
+  .bg-03 {
+    background: url('../assets/images/page3.jpg') no-repeat;
     background-size: cover;
   }
 
