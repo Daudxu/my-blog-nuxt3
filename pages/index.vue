@@ -4,34 +4,10 @@
 			<span class="menu-point w-3 h-3 bg-white block my-4 opacity-60 transition duration-400 ease-in-out cursor-pointer" v-bind:class="{active: activeSection == index}" v-on:click="scrollToSection(index)" v-for="(offset, index) in offsets" v-bind:key="index" >
 			</span>
 		</div>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-blue-100 dark:bg-blue-900 ">
-
-      <div class="container mx-auto p-4">
-          <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="flex items-center justify-center">
-       
-                <div class="space-y-3">
-                <!-- ---------------------------- -->
-                <h1 class="text-2xl font-sans font-bold" ref="typewriterTarget">Hey 👋, I'm Dan</h1>
-                <p class="text-xl font-semibold">I am Uyghur, which is a minority in China. Now I am studying medical imaging at HUST.</p>
-                <div class="space-y-3" v-html="homeData.about_content"></div>
-                <ul class="flex space-x-3">
-                  <li class="">
-                      <a href="" title="github" target="_blank">
-                        <img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=plastic&logo=gmail&logoColor=white" height="25px" alt="Email">
-                      </a>
-                  </li>
-                </ul>
-               </div>
-            </div>
-            <div class="p-4">
-              <img :src="homeData.about_image" class="rounded-2xl" />
-            </div>
-          </div>
-      </div>
-
+		<section class="h-screen w-full flex justify-center items-center flex-col">
+            <about-section :homeData="homeData"></about-section>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col bg-gray-100 dark:bg-gray-900">
+		<section class="h-screen w-full flex justify-center items-center flex-col relative bg-01">
         <div class="container mx-auto p-4">
             <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
               <!-- -------------------------------------- -->
@@ -58,7 +34,7 @@
       <div>
         <div class="block text-center" >
           <!-- <ClientOnly> -->
-            <el-carousel :interval="4000" type="card" class="w-[365px] sm:w-[500px] md:h-[300px] md:w-[800px] ">
+            <el-carousel :interval="4000" type="card" class="w-[365px] sm:w-[500px] md:w-[800px] ">
               <el-carousel-item v-for="item in homeData.projects" :key="item" class="w-full rounded-2xl shadow-xl group" :style="{ backgroundImage: `url('${item.image}')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }">
                 <div class="bg-slate-800/70 font-sans text-slate-50 h-full w-full hidden  group-hover:block" >
                     <h3 class="h-full w-full flex items-center justify-center"> {{ item.title }} </h3> 
@@ -77,16 +53,16 @@
   </template>
   
   <script setup>  
-	import Typewriter from 'typewriter-effect/dist/core';
-  import { useAppStore } from '~~/stores/useAppStore'
+  // import { useAppStore } from '~~/stores/useAppStore';
+  import AboutSection from '~~/pages/components/AboutSection'
 
   definePageMeta({
     layout: 'no-footer',
   });
 
   const { appApi } = useApi()
-  const store = useAppStore();
-	const typewriterTarget = ref(null)
+  // const store = useAppStore();
+
 	const inMove = ref(false)
   const inMoveDelay =  ref(400)
 	const activeSection = ref(0)
@@ -185,17 +161,14 @@
   }
 
 	onMounted( async () => {
-    console.log("useArticleStore", store.someState = 'abc')
 		calculateSectionOffsets();
-		new Typewriter(typewriterTarget.value, {
-			strings: ["Hey 👋, I'm Dan", "Welcome to my website!"],
-			autoStart: true,
-			loop: true,
-		});
 		window.addEventListener('DOMMouseScroll', handleMouseWheelDOM);
 		window.addEventListener('mousewheel', handleMouseWheel, { passive: false });
 		window.addEventListener('touchstart', touchStart, { passive: false });
 		window.addEventListener('touchmove', touchMove, { passive: false });
+
+    const resHomeData = await appApi.getHomeData()
+    homeData.value = resHomeData.data
 	})
 
 	onBeforeUnmount(() => {

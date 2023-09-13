@@ -41,6 +41,7 @@
     "sass": "^1.65.1",
     "sass-loader": "^13.3.2",
     "sensitive-word-tool": "^1.1.9",
+    "simplex-noise": "^4.0.1",
     "three": "^0.156.1",
     "typewriter-effect": "^2.20.1",
     "vue3-emoji-picker": "^1.1.7"
