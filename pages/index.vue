@@ -42,25 +42,9 @@
                   <div class="space-y-3">
                       <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
                       <ul class="space-y-3 w-full">
-                        <li> Hi, I'm Dane👋。 </li>
-                        <li class="flex items-center space-x-3 "> 
-                          <div>💻</div>
-                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>
-                        </li>
-                        <li class="flex items-center space-x-3 overflow-wrap break-word"> 
-                          <div>🌐</div>
-                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/languages/js.svg" />
-                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/frameworks/react.svg" />
-                          <img src="https://raw.githubusercontent.com/8bithemant/8bithemant/master/svg/dev/frameworks/vue.svg" />
-                          <!-- <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>   -->
-                        </li>
-                        <li class="flex items-center space-x-3 "> 
-                          <div>🛢</div>
-                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>  
-                        </li>
-                        <li class="flex items-center space-x-3 "> 
-                          <div>🔧</div>
-                          <img src="https://camo.githubusercontent.com/e9da2a14c7b3f9cf9792e943d2a39fd0747cf8d940f640b9b1ae5e66868d7011/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e75782d3333333333333f7374796c653d666c6174266c6f676f3d4c696e7578266c6f676f436f6c6f723d464343363234"/>  
+                        <li class="flex items-center flex-row flex-wrap" v-for="(item, index) in homeData.group_skills" :key="index"> 
+                          <div class="text-2xl">{{ item.icon }}</div>
+                          <img v-for="(row, idx) in item.skills" :src="row.badge"  :key="idx" class="m-2 rounded-lg hover:shadow-xl" />
                         </li>
                       </ul>
                     </div>
