@@ -6723,6 +6723,11 @@ yargs@^17.5.1:
     y18n "^5.0.5"
     yargs-parser "^21.1.1"
 
+yuka@^0.7.8:
+  version "0.7.8"
+  resolved "https://registry.npmmirror.com/yuka/-/yuka-0.7.8.tgz#5297c2d8c36e6e6bbe24c6119522cbc2a8dd8dd7"
+  integrity sha512-G/pFcMZh2Azz7Yy500NSV1jQ0Ru7h9hTNyEW+HjRXcdzjJIyp/3mCGspnx7VJVP06zxORqK6mkl5TywLqVUnVg==
+
 zhead@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/zhead/-/zhead-2.1.1.tgz#42950fbd5468268a07dc5b042a6c0261d340535d"
