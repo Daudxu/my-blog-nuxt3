@@ -42,8 +42,6 @@ const props = defineProps({
 const typewriterTarget = ref(null)
 const canvas = ref(null);
 
-
-
 onMounted(()=>{
 
     new Typewriter(typewriterTarget.value, {
@@ -51,7 +49,6 @@ onMounted(()=>{
         autoStart: true,
         loop: true,
     });
-
 
     const sizes = {
         width: window.innerWidth,
