@@ -45,9 +45,9 @@
         </div>
       </div>
 		</section>
-		<section class="h-screen w-full flex justify-center items-center flex-col">
+		<!-- <section class="h-screen w-full flex justify-center items-center flex-col">
         <laboratory></laboratory>
-		</section>
+		</section> -->
 	</div>
   </template>
   

@@ -28,8 +28,9 @@ const fetch = (url: string, options?: any, headers?: any): Promise<any> => {
   let customHeaders = headers
   if(process.client){
     const user:any =  localStorage.getItem("user")
-    customHeaders = { token:  JSON.parse(user)['token'], ...headers }
-
+    if(JSON.parse(user)['token']){
+      customHeaders = { token:  JSON.parse(user)['token'], ...headers }
+    }
   }
 
 

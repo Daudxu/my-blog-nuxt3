@@ -7,7 +7,7 @@
             <div class="space-y-3 md:space-y-6">
             <!-- ---------------------------- -->
                 <h1 class="text-xl md:text-2xl font-sans font-bold" ref="typewriterTarget">Hey 👋, I'm Dan</h1>
-                <p class="text-lg md:text-xl font-medium">I am Uyghur, which is a minority in China. Now I am studying medical.</p>
+                <p class="text-lg md:text-xl font-medium">你好！我是Dan，一个对编程充满激情的开发者。我喜欢探索新技术、构建创意项目，并且乐于与开源社区分享我的经验。我的主要兴趣领域包括[您的兴趣领域，例如：Web开发、数据科学等]。我喜欢挑战自己，不断学习，同时也愿意帮助他人解决技术问题。</p>
                 <div class="space-y-3" v-html="homeData.about_content"></div>
                 <ul class="flex space-x-3">
                     <li class="">
