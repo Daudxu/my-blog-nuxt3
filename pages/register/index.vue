@@ -8,9 +8,9 @@
                   <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">用户名</label>
                   <input type="text" name="username" id="username" v-model="formData.username" @input="validateUsername" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输入你的用户名" required>
               </div>
-              <!-- <div>
+              <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">邮箱</label>
-                  <input type="email" name="email" id="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输你的邮箱" required>
+                  <input type="email" name="email" id="email" v-model="formData.email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输你的邮箱" required>
               </div>
               <div class="mb-4">
                 <label for="code" class="block text-sm font-medium text-gray-700">验证码</label>
@@ -23,7 +23,7 @@
                   />
                   <button @click="startCountdown" :disabled="countdownData.isCounting" class="text-white px-3 py-3 w-[30%] rounded-md text-xs  transition duration-150" :class="{ 'cursor-not-allowed bg-blue-300' : countdownData.isCounting, 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700': !countdownData.isCounting }" type="button"> {{ countdownData.isCounting ? `${countdownData.countdown}秒后重发` : '获取验证码' }}</button>
                 </div>
-              </div> -->
+              </div>
               <div>
                   <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">密码</label>
                   <input type="password" name="password" id="password" v-model="formData.password" @input="validatePassword" placeholder="请输入你的密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
@@ -67,13 +67,15 @@ definePageMeta({
 });
 
 const formData = reactive({
-    username:'zhagsan123',
-    password:'zhagsan123',
-    confirmPassword:'zhagsan123'
+    username:'',
+    email:'',
+    password:'',
+    confirmPassword:''
 })
 
 const errors = reactive({
     username:'',
+    email:'',
     password:'',
     confirmPassword:'',
     isAgree:''
@@ -89,21 +91,38 @@ const validateConfirmPassword = () => {
 
 }
 
+const warning = (message) => {
+    ElNotification({
+        title: 'Warning',
+        message: message,
+        type: 'warning',
+    })
+}
+
 const register = async () => {
   if(!formData.username){
-      errors.username = "请输入密码"
+      warning("请输入用户名")
+      return false
+  }
+
+  if(!formData.email){
+      warning("请先输入邮箱")
+      return false
   }
 
   if(!formData.password){
-      errors.password = "请输入密码"
+      warning("请输入密码")
+      return false
   }
 
   if(!formData.confirmPassword){
-      errors.confirmPassword = "请输入确认密码"
+      warning("请输入确认密码")
+      return false
   }
   
   if(!isAgree.value){
-    errors.isAgree = "请同意服务条款，隐私政策"
+    warning("请阅读并同意服务条款，隐私政策")
+    return false
   }
 
   const arr = {
@@ -121,19 +140,36 @@ const countdownData = reactive({
   countdown: time
 });
 
-const startCountdown = () => {
-  console.log("countdownData", countdownData.isCounting)
-  if (!countdownData.isCounting) {
-    countdownData.isCounting = true;
-    let timer = setInterval(() => {
-      countdownData.countdown--;
-      if (countdownData.countdown <= 0) {
-        clearInterval(timer);
-        countdownData.isCounting = false;
-        countdownData.countdown = time; 
-      }
-    }, 1000);
+const startCountdown = async () => {
+  if(formData.email){
+    const res =  await userApi.sendCode({"email" : formData.email})
+    if(res.code === 1) {
+        if (!countdownData.isCounting) {
+          countdownData.isCounting = true;
+          let timer = setInterval(() => {
+            countdownData.countdown--;
+            if (countdownData.countdown <= 0) {
+              clearInterval(timer);
+              countdownData.isCounting = false;
+              countdownData.countdown = time; 
+            }
+          }, 1000);
+        }
+    }else{
+      ElNotification({
+        title: 'Warning',
+        message: '请1分钟后再次尝试！',
+        type: 'warning',
+      })
+    }
+  }else{
+    ElNotification({
+      title: 'Warning',
+      message: '请先输入邮箱',
+      type: 'warning',
+    })
   }
+
 };
 
 </script>
