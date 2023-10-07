@@ -18,6 +18,7 @@
                   <input
                     id="code"
                     type="text"
+                    v-model="formData.smsCode"
                     class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1 w-[65%]"
                     placeholder="请输入验证码"
                   />
@@ -48,7 +49,6 @@
               </div>
           </form>
       </div>
-
   </div>
 </template>
 
@@ -60,6 +60,7 @@ import { reactive } from 'vue';
 const isAgree = ref(false)
 const { userApi } = useApi()
 const time = 60;
+const router = useRouter();
 
 definePageMeta({
   layout: 'no-header-footer',
@@ -69,6 +70,7 @@ definePageMeta({
 const formData = reactive({
     username:'',
     email:'',
+    smsCode:'',
     password:'',
     confirmPassword:''
 })
@@ -76,6 +78,7 @@ const formData = reactive({
 const errors = reactive({
     username:'',
     email:'',
+    smsCode:'',
     password:'',
     confirmPassword:'',
     isAgree:''
@@ -91,6 +94,13 @@ const validateConfirmPassword = () => {
 
 }
 
+const success = (message) => {
+    ElNotification({
+      title: 'Success',
+      message: message,
+      type: 'success',
+    })
+}
 const warning = (message) => {
     ElNotification({
         title: 'Warning',
@@ -107,6 +117,10 @@ const register = async () => {
 
   if(!formData.email){
       warning("请先输入邮箱")
+      return false
+  }
+  if(!formData.smsCode){
+      warning("请先输入验证码")
       return false
   }
 
@@ -127,12 +141,24 @@ const register = async () => {
 
   const arr = {
       account: formData.username,
+      email: formData.email,
+      smsCode: formData.smsCode,
       password: formData.password,
       password_confirm: formData.confirmPassword,
   }
 
   const res =  await userApi.register(arr)
-  console.log("res", res)
+  if(res.code === 1) {
+    success(res.msg)
+    setTimeout(() => {
+      if(process.client){
+            router.push('/login')
+        }
+    }, 1500);
+  }else{
+    warning(res.msg)
+  }
+
 }
 
 const countdownData = reactive({
