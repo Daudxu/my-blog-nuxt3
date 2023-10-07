@@ -19,10 +19,16 @@
              <div class="flex items-center gap-3 md:gap-5">
                  <div class="flex justify-center items-center rounded-xl shadow-xl px-5 p-1 dark:text-slate-50 bg-slate-50 dark:bg-slate-700"> 
                      <!-- <a  class="mr-2 p-1">Sign in</a> -->
-
-                     <div class="w-8 h-8 md:w-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden" v-if="store.token">
-                         <img :src="store.userinfo.avatar" class="w-[32px] h-[32px] cursor-pointer" />
+                     <div  v-if="store.token" class="flex"> 
+                        <div class="w-8 h-8 md:w-8 flex justify-center items-center bg-gray-500 rounded-full overflow-hidden">
+                            <img :src="store.userinfo.avatar" class="w-[32px] h-[32px] cursor-pointer" />
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <span class="px-3">dane</span>
+                            <span class="text-sm cursor-pointer" @click="handleClickLogOut">退出</span>
+                        </div>
                      </div>
+         
                      <div class="w-8 h-8 md:w-8 flex justify-center items-center" v-else>
                         <NuxtLink class="" to="/login">登录</NuxtLink>
                      </div>
@@ -90,4 +96,8 @@
     appStore.webConfig = config.data
     // console.log("config" ,config)
  })
+
+ const handleClickLogOut = () => {
+    store.token = ''
+ }
  </script>
