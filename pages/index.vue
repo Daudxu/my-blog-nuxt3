@@ -185,6 +185,9 @@
   </script>
   
   <style scoped>
+  body {
+    overflow-x: hidden;
+  }
 	.sections-menu .menu-point.active {
 		opacity: 1;
 		transform: scale(1.2);
