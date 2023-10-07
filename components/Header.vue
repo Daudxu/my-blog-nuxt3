@@ -24,7 +24,7 @@
                             <img :src="store.userinfo.avatar" class="w-[32px] h-[32px] cursor-pointer" />
                         </div>
                         <div class="flex justify-center items-center">
-                            <span class="px-3">dane</span>
+                            <span class="px-3">{{store.username}}</span>
                             <span class="text-sm cursor-pointer" @click="handleClickLogOut">退出</span>
                         </div>
                      </div>
