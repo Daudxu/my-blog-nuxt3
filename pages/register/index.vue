@@ -6,7 +6,7 @@
               <h5 class="text-xl font-medium text-gray-900 dark:text-white text-center">注册</h5>
               <div>
                   <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">用户名</label>
-                  <input type="text" name="username" id="username" v-model="formData.username" @input="validateUsername" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输入你的用户名" required>
+                  <input type="text" name="username" id="username" v-model="formData.username"  class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="请输入你的用户名" required>
               </div>
               <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">邮箱</label>
@@ -27,11 +27,11 @@
               </div>
               <div>
                   <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">密码</label>
-                  <input type="password" name="password" id="password" v-model="formData.password" @input="validatePassword" placeholder="请输入你的密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
+                  <input type="password" name="password" id="password" v-model="formData.password" placeholder="请输入你的密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
               </div>
               <div>
                   <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">确认密码</label>
-                  <input type="password" name="confirmPassword" id="confirmPassword" v-model="formData.confirmPassword" @input="validateConfirmPassword" placeholder="请输入你的确认密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
+                  <input type="password" name="confirmPassword" id="confirmPassword" v-model="formData.confirmPassword" placeholder="请输入你的确认密码" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" required>
               </div>
               <div class="flex items-start">
                   <div class="flex items-center h-5">
@@ -54,6 +54,7 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { success,warning } from '@/utils/tools';
 // import { useUserStore } from '~~/stores/useUserStore'
 
 // const store = useUserStore();
@@ -75,39 +76,6 @@ const formData = reactive({
     confirmPassword:''
 })
 
-const errors = reactive({
-    username:'',
-    email:'',
-    smsCode:'',
-    password:'',
-    confirmPassword:'',
-    isAgree:''
-})
-
-const validateUsername = () => {
-  
-}
-const validatePassword = () => {
-
-}
-const validateConfirmPassword = () => {
-
-}
-
-const success = (message) => {
-    ElNotification({
-      title: 'Success',
-      message: message,
-      type: 'success',
-    })
-}
-const warning = (message) => {
-    ElNotification({
-        title: 'Warning',
-        message: message,
-        type: 'warning',
-    })
-}
 
 const register = async () => {
   if(!formData.username){

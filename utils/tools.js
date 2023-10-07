@@ -61,7 +61,24 @@ const replaceFace = (con) => {
     return con;
 }
 
+const success = (message) => {
+    ElNotification({
+      title: 'Success',
+      message: message,
+      type: 'success',
+    })
+}
+const warning = (message) => {
+    ElNotification({
+        title: 'Warning',
+        message: message,
+        type: 'warning',
+    })
+}
+
 export {
     emojis,
-    replaceFace
+    replaceFace,
+    success,
+    warning
 }
