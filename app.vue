@@ -40,7 +40,7 @@ onMounted(()=>{
     scene = new THREE.Scene();
 
     // 创建一个相机
-    camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100)
+    camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 1000)
     camera.position.x = -0.25
     camera.position.y = 0
     camera.position.z = 5
@@ -242,6 +242,17 @@ onMounted(()=>{
      */
     generateSnow()
 
+    window.addEventListener('scroll', function() {
+        sizes.width = window.innerWidth
+        sizes.height = document.body.offsetHeight
+        // Update camera
+        camera.aspect = sizes.width / sizes.height
+        camera.updateProjectionMatrix()
+
+        // Update renderer
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  });
 
     /**
      * Animate
@@ -271,7 +282,7 @@ onMounted(()=>{
 
         // Render
         renderer.render(scene, camera)
-
+        // resize()
         // Call tick again on the next frame
         window.requestAnimationFrame(animate)
     }
