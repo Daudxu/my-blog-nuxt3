@@ -34,4 +34,8 @@ export default new class Article extends Http {
         return this.post('/api/article/addReplies', params)
     }
 
+    hotLists () {
+        return this.get('/api/search/hotLists')
+    }
+
 }

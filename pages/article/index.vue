@@ -10,17 +10,13 @@
                 <div class="mb-4 flex">
                     <div class="font-sans text-sm flex-shrink-0">热门搜索: </div>
                     <div class="ml-3 flex flex-wrap  md:flex-row">
-                        <span @click="handleClickSearch('绿色')" class="bg-blue-100 cursor-pointer mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">绿色</span>
-                        <!-- <span class="bg-gray-100 cursor-pointer mb-2 md:mb-0 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Dark</span>
-                        <span class="bg-red-100 cursor-pointer mb-2 md:mb-0 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Red</span>
-                        <span class="bg-green-100 cursor-pointer mb-2 md:mb-0 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span>
-                        <span class="bg-yellow-100 cursor-pointer mb-2 md:mb-0 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Yellow</span> -->
-                    </div>
+                        <span @click="handleClickSearch(item.name)" v-for="(item, index) in hotLists" :key="index" class="bg-blue-100 cursor-pointer mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{item.name}}</span>
+                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================== -->
+        <!-- start -->
         <div class="flex">
              <div class="mr-3 flex-shrink-0">
                 <ul>
@@ -57,7 +53,7 @@
                 <el-empty v-else description="暂无数据" />
             </div>
         </div>
-        <!-- ================== -->
+        <!-- end -->
 
     </div>
 </template> 
@@ -69,6 +65,7 @@
 
  const searchKey = ref('')
  const lists = ref([])
+ const hotLists = ref([])
  const totalPages = ref(0)
  const currentPage = ref('')
  const countPage = ref(0)
@@ -94,7 +91,14 @@ const loadData = async () => {
     searchKey.value = route.query.title
 } 
 
+const loadHotData = async () => {
+    const response = await articleApi.hotLists()
+    hotLists.value = response.data.data
+    console.log("response", hotLists.value)
+}
+
 loadData()
+loadHotData()
 
 const handleClickSearch = (key = '') => {
     const searchKeyArr = { title: searchKey.value }
