@@ -37,8 +37,8 @@
                               </div>
                           </div>
                           <div class="p-4 bg-white">
-                              <h2 class="text-xl font-semibold">{{ item.title }}</h2>
-                              <p class="text-gray-500">{{ item.description }}</p>
+                              <h2 class="text-xl font-semibold max-h-[30px] overflow-hidden">{{ item.title }}</h2>
+                              <p class="text-gray-500 max-h-[50px] overflow-hidden">{{ item.description }}</p>
                           </div>
                       </div>
                   </div>

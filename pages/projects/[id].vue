@@ -1,19 +1,27 @@
 <template>
-       <div class="w-[1024px] mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
-           <div v-if="detail">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {{ detail.title }}
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {{ detail.description  }}
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" v-if="isClient" v-html="detail.content">
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {{ detail.url  }}
-                </div>
-           </div>
+    <div class="w-[1024px] mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
+        <div v-if="detail">
+             <h1 class="text-center text-xl font-bold py-3">
+               {{ detail.title }}
+             </h1>
+             <p class="py-3">
+                 <div class="font-bold">项目描述：</div>
+                 <div>
+                     {{ detail.description  }}
+                 </div>
+             </p>
+             <p class="py-3">
+                 <div class="font-bold">项目内容：</div>
+                 <p  class="py-3" v-if="isClient" v-html="detail.content"></p>
+             </p>
+             <p class="py-3">
+                 <div class="font-bold">项目地址：</div>
+                 <div class="py-3" v-if="isClient" >
+                     {{ detail.url  }}
+                 </div>
+             </p>
         </div>
+     </div>
 </template>
 
 <script setup>
