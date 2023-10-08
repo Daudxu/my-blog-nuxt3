@@ -94,7 +94,6 @@ const loadData = async () => {
 const loadHotData = async () => {
     const response = await articleApi.hotLists()
     hotLists.value = response.data.data
-    console.log("response", hotLists.value)
 }
 
 loadData()
