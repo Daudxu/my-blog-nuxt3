@@ -1,11 +1,11 @@
 <template>
-    <canvas ref="canvas" class="absolute z-[-1]"></canvas>
+    <!-- <canvas ref="canvas" class="absolute z-[-1]"></canvas> -->
     <NuxtLayout>
       <NuxtLoadingIndicator color="blue"/>
       <NuxtPage />
     </NuxtLayout>
 </template>
-
+<!-- 
 <script setup>
 import * as THREE from 'three';
 
@@ -242,17 +242,17 @@ onMounted(()=>{
      */
     generateSnow()
 
-    window.addEventListener('scroll', function() {
-        sizes.width = window.innerWidth
-        sizes.height = document.body.offsetHeight
-        // Update camera
-        camera.aspect = sizes.width / sizes.height
-        camera.updateProjectionMatrix()
+//     window.addEventListener('scroll', function() {
+//         sizes.width = window.innerWidth
+//         sizes.height = document.body.offsetHeight
+//         // Update camera
+//         camera.aspect = sizes.width / sizes.height
+//         camera.updateProjectionMatrix()
 
-        // Update renderer
-        renderer.setSize(sizes.width, sizes.height)
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  });
+//         // Update renderer
+//         renderer.setSize(sizes.width, sizes.height)
+//         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+//   });
 
     /**
      * Animate
@@ -291,4 +291,4 @@ onMounted(()=>{
 
 
 
-</script>
+</script> -->
