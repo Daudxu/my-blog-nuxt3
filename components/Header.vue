@@ -78,8 +78,7 @@
     {name: "文章", path:"/article"},
     {name: "相册", path:"/albums"},
     {name: "项目", path:"/projects"},
-    {name: "留言", path:"/message-board"},
-    {name: "实验室", path:"/laboratory"}
+    {name: "留言板", path:"/message-board"},
  ])
 
  const Menu = () => {

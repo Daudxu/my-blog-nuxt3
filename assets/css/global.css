@@ -2,6 +2,6 @@
 
 body {
     overflow-x: hidden;
-    background: url('./images/bg.jpg') no-repeat;
+    background: url('../images/bg.jpg') no-repeat;
     background-size: cover;
 }
