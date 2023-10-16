@@ -31,6 +31,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [ { src:'@/plugins/baidu',mode:'client' }],
   devtools: {
     enabled: true,
   },

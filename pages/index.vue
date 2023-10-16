@@ -70,6 +70,15 @@
   const touchStartY = ref(0)
   const homeData = ref('')
 
+  useHead({
+    title: 'Dan blog ',
+    meta: [
+      { name: 'keywords', content: "dan的博客 dan blog php Python Golang Vve React" },
+      { name: 'description', content: '探索最新的技术趋势和行业动态。我们提供深入的技术分析、实用的开发教程和最佳实践，助您掌握编程技能、了解最新的软件工程方法，并在快速发展的科技领域中保持竞争力。立即加入，开启您的技术之旅！' }
+    ]
+  })
+
+
 	const calculateSectionOffsets = () => {
       let sections = document.getElementsByTagName('section');
       let length = sections.length;
@@ -104,39 +113,52 @@
     }
     
 	 const moveDown = () => {
-      inMove.value = true;
+
+        inMove.value = true;
+        
         activeSection.value--;
           
         if(activeSection.value < 0) activeSection.value = offsets.value.length - 1;
           
         scrollToSection(activeSection.value, true);
+
     }
     
 	 const moveUp = () => {
-      inMove.value = true;
+
+        inMove.value = true;
+
         activeSection.value++;
           
         if(activeSection.value > offsets.value.length - 1) activeSection.value = 0;
           
         scrollToSection(activeSection.value, true);
+
     }
 
 	 const scrollToSection = (id, force = false) => {
+    
       if(inMove.value && !force) return false;
       
       activeSection.value = id;
+
       inMove.value = true;
       
       let section = document.getElementsByTagName('section')[id];
+
       if(section) {
+
         document.getElementsByTagName('section')[id].scrollIntoView({behavior: 'smooth'});
+        
       }
       
       setTimeout(() => {
+
         inMove.value = false;
+        
       }, inMoveDelay.value);
       
-    }
+  }
 
     const touchStart = (e) => {
       e.preventDefault();
