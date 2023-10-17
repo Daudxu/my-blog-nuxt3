@@ -161,6 +161,7 @@
   }
 
     const touchStart = (e) => {
+      
       e.preventDefault();
       
       touchStartY.value = e.touches[0].clientY;
