@@ -1,6 +1,5 @@
 <template>
     <div class="flex justify-center items-center h-screen w-screen">
-    
         <div class="w-full max-w-sm p-4 mx-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
             <form class="space-y-6">
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white text-center">登录</h5>
@@ -29,7 +28,6 @@
                 </div>
             </form>
         </div>
-        
     </div>
   </template>
   
