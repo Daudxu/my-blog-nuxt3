@@ -109,8 +109,7 @@
             errors.password = "请输入密码"
             return 
         }
-
-
+        
         const arr = {
             account: formData.username,
             password: formData.password

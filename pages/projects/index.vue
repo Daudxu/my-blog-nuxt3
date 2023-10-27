@@ -29,10 +29,10 @@
           <div  v-if="lists.length > 0">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div v-for="(item, index) in lists" :key="index" class="rounded-lg overflow-hidden shadow-md cursor-pointer" @click="handleClickDetail(item.id)">
-                          <div class="aspect-w-16 aspect-h-9 bg-slate-200">
+                          <!-- <div class="aspect-w-16 aspect-h-9 bg-cover" :class="'bg-[url('+item.image+')]'" > -->
+                          <div class="aspect-w-16 aspect-h-9 bg-cover" :style="{ background: 'url(' + item.image + ') no-repeat', 'background-size': 'cover' }" >
                               <div class="flex items-center justify-center h-full">
                               <div class="w-48 h-32">
-                                  <img :src="item.image" :alt="item.title" class="object-contain w-full h-full" />
                               </div>
                               </div>
                           </div>
