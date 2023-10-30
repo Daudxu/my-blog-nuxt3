@@ -101,7 +101,7 @@
     const login = async () => {
         isSubmitting.value = true;
         if(!formData.username){
-            errors.username = "请输入密码"
+            errors.username = "请输入用户名"
             return
         }
 

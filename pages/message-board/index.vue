@@ -2,10 +2,10 @@
     <div class="w-[1024px] h-min-screen mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-6 xs:p-6 md:p-9">
         
         <div class="w-full ">
-            <!-- <div class="bg-green-700 border border-gray-400 rounded-lg p-4 mb-3 text-white">
+            <div class="bg-green-700/40 border border-gray-400 rounded-lg p-4 mb-3 text-white">
                 <p class="text-xl font-bold text-center">寄语</p>
                 <p>点点字迹，就是缕缕关注；条条留言，就是最美的牵挂；因为有你，空间多了一丝暖意；因为有你，人生多了一点感动；因为有你，生活多了一些精彩；认识你真好！</p>
-            </div> -->
+            </div>
 
             <div class="flex flex-col mb-6">
                 <textarea v-model="message" ref="textarea" class="w-full h-32 px-4 py-2 bg-gray-100 dark:bg-gray-800 border rounded focus:border-blue-500 focus:ring focus:ring-blue-200 transition resize-none focus:outline-blue-500 dark:focus:outline-blue-800" placeholder="请输入内容..."></textarea>
@@ -50,7 +50,7 @@
                            
                                 <!-- ================================ -->
                                 <div v-if="item.comments.length > 0">
-                                    <div class="text-xs">评论</div>
+                                    <div class="text-xs">用户回复</div>
                                     <div class="py-3 flex" v-for="(row, idx) in item.comments" :key="idx">
                                         <div class="flex-shrink-0 mr-2">
                                             <img :src="row.user.avatar" class="w-[38px] h-[38px]" />
@@ -124,7 +124,6 @@
                 </span>
             </template>
         </el-dialog>
-        
     </ClientOnly>
 </template>
 <script setup>

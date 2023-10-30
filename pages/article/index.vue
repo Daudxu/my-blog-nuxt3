@@ -1,21 +1,14 @@
 <template>
     <div class="w-[1024px]  mt-20 bg-slate-50 dark:bg-slate-700 rounded-lg md:rounded-xl mx-3 lg:mx-0 shadow-lg md:shadow-xl p-3 xs:p-6 md:p-9">
-          
         <div class="flex justify-center">
             <div class="sm:min-w-[380px]">
                 <div class="mb-4 flex">
                     <input v-model="searchKey" class="flex-grow p-2 border rounded-l-md focus:outline-none focus:border-blue-500" type="text" placeholder="">{{  }}
                     <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 ml-3"  @click="handleClickSearch()">搜索</button>
                 </div>
-                <div class="mb-4 flex">
-                    <div class="font-sans text-sm flex-shrink-0">热门搜索: </div>
-                    <div class="ml-3 flex flex-wrap  md:flex-row">
-                        <span @click="handleClickSearch(item.name)" v-for="(item, index) in hotLists" :key="index" class="bg-blue-100 cursor-pointer mb-2 md:mb-0 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{item.name}}</span>
-                     </div>
-                </div>
+
             </div>
         </div>
-
         <!-- start -->
         <div class="flex">
              <div class="mr-3 flex-shrink-0">
@@ -35,7 +28,6 @@
                             <p class="text-gray-600">{{ item.desc }}</p>
                             </div>
                         </div>
-
                     </div>
                     <div class="flex justify-center items-center my-3" v-if="totalPages > 1">
                         <el-pagination 
@@ -54,7 +46,6 @@
             </div>
         </div>
         <!-- end -->
-
     </div>
 </template> 
 
@@ -65,15 +56,14 @@
 
  const searchKey = ref('')
  const lists = ref([])
- const hotLists = ref([])
  const totalPages = ref(0)
  const currentPage = ref('')
  const countPage = ref(0)
  const pageSize = 10
  const loading = ref(false)
- 
+ // 获取分类
 const resCate = await articleApi.cate()
-
+// 数据请求
 const loadData = async () => {
     loading.value = true 
     searchKey.value = route.query.title
@@ -90,15 +80,10 @@ const loadData = async () => {
     loading.value = false
     searchKey.value = route.query.title
 } 
-
-const loadHotData = async () => {
-    const response = await articleApi.hotLists()
-    hotLists.value = response.data.data
-}
-
+// 初始化页面加载数据
 loadData()
-loadHotData()
 
+// 点击搜索
 const handleClickSearch = (key = '') => {
     const searchKeyArr = { title: searchKey.value }
     if(key){
@@ -110,7 +95,7 @@ const handleClickSearch = (key = '') => {
         loadData()
     }, 500)
 }
-
+// 点击分页
 const handleCurrentChange = (page_no) => {
     const currentPageArr = {
         page_no
@@ -122,7 +107,7 @@ const handleCurrentChange = (page_no) => {
         loadData()
     }, 500)
 }
-
+// 点击分类
 const handleClickCate = (cid) => {
     const cateArr = {
         cid
@@ -155,14 +140,12 @@ const removeEmptyProperties = (obj) =>{
   }
   return obj
 }
-
+// 当前页
 const updateCurrentPage = (e) => {
     currentPage.value = e;
 };
-
+// 去详情页
 const handleClickDetail = (id)=> {
     router.push({ name: 'article-id', params: { id } });
   }
-
-
 </script>

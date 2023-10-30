@@ -21,9 +21,9 @@
             <!-- ---------------------------- -->
         </div>
         </div>
-        <div class="p-4">
-            <img src="~/assets/images/page1.gif" class="rounded-2xl shadow-2xl" />
-        </div>
+            <div class="p-4">
+                <img src="~/assets/images/page1.gif" class="rounded-2xl shadow-2xl" />
+            </div>
         </div>
     </div>
 </template>

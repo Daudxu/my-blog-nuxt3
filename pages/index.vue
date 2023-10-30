@@ -1,8 +1,12 @@
 <template>
 	<div class="w-full h-full">
+    <!-- about start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col overflow-hidden">
+             <!-- 引入about子组件 -->
             <about-section :homeData="homeData"></about-section>
 		</section>
+    <!-- about end -->
+    <!-- skills start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col relative bg-02">
         <div class="container mx-auto p-4">
             <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
@@ -23,6 +27,8 @@
             </div>
        </div>
 		</section>
+    <!-- skills end -->
+    <!-- projects start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-03">
       <h1 class="py-7 text-2xl font-sans font-bold">项目展示</h1>
       <div>
@@ -39,6 +45,7 @@
         </div>
       </div>
 		</section>
+    <!-- projects end -->
 	</div>
   </template>
   
