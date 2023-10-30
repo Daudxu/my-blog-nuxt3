@@ -5,8 +5,7 @@ import articleApi from '~~/server/api/article'
 import albumsApi from '~~/server/api/albums'
 import projectsApi from '~~/server/api/projects'
 import messageBoardApi from '~~/server/api/messageBoard'
-import laboratoryApi from '~~/server/api/laboratory'
- 
+
 export default {
   appApi,
   userApi,
@@ -15,5 +14,4 @@ export default {
   albumsApi,
   projectsApi,
   messageBoardApi,
-  laboratoryApi,
 }

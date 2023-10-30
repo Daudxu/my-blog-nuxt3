@@ -52,6 +52,7 @@
   // import { useAppStore } from '~~/stores/useAppStore';
   import AboutSection from '~~/pages/components/AboutSection'
 
+
   definePageMeta({
     layout: 'no-footer',
   });

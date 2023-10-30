@@ -22,7 +22,7 @@
         </div>
         </div>
         <div class="p-4">
-            <img :src="homeData.about_image" class="rounded-2xl shadow-2xl" />
+            <img src="~/assets/images/page1.gif" class="rounded-2xl shadow-2xl" />
         </div>
         </div>
     </div>
