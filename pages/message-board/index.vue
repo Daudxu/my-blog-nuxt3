@@ -191,7 +191,7 @@ const insertEmoji = (emoji) => {
 };
 
 const Comment = async ( ) => {
-
+2.
     if(message.value) {
         isLoading.value = true;
         const params = {
