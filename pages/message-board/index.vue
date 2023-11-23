@@ -198,11 +198,24 @@ const Comment = async ( ) => {
            "content":message.value
         }  
         const  resAdd =  await messageBoardApi.addMessage(params)
-        if(resAdd.code === 1){
+        // console.log("resAdd", resAdd.code)
+        if(resAdd.code === 1) {
             loadData(1)
-            message.value = ""
+        }else{
+            isLoading.value = false;
+            // console.log("resAdd", resAdd.code)
+            notificationWarning(resAdd.msg)
+            // isLoading.value = false;
+            setTimeout(() => {
+            router.push("/login")
+            }, 2000);
         }
-        isLoading.value = false;
+        // isLoading.value = false
+        // if(resAdd.code === 1){
+        //     loadData(1)
+        //     message.value = ""
+        // }
+ 
     }else{
         ElMessage({
             showClose: true,

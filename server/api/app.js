@@ -9,5 +9,5 @@ export default new class App extends Http {
   getHomeData() {
      return this.get('/api/pc/home')
   }
-
+  
 }
