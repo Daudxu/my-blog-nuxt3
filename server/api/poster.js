@@ -17,5 +17,4 @@ export default new class Poster extends Http {
     addReplies(data) {
         return this.post('/api/poster/addReplies',data)
     }
-
 }
