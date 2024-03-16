@@ -19,7 +19,7 @@
                       <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
                       <ul class="space-y-3 w-full">
                         <li class="flex items-center flex-row flex-wrap" v-for="(item, index) in homeData.group_skills" :key="index"> 
-                          <div class="md:text-2xl">{{ item.icon }}</div>
+                          <!-- <div class="md:text-2xl">{{ item.name }}</div> -->
                           <img v-for="(row, idx) in item.skills" :src="row.badge"  :key="idx" class="m-2 rounded-lg hover:shadow-xl h-5 md:h-7" />
                         </li>
                       </ul>

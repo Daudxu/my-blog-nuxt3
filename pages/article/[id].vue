@@ -23,7 +23,7 @@
                             <hr class="my-4 border-t"> 
                          </div>
                     </div>
-                </div>
+                </div> 
               </div>
         </div>
     </div>

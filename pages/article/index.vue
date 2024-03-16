@@ -17,7 +17,7 @@
                     <li  @click="handleClickCate(item.id)" v-for="(item, index) in resCate.data" :key="index" class="p-3 mb-1  bg-white flex rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-95 cursor-pointer">{{item.name}}</li>
                 </ul>
              </div>
-
+ 
             <div class="w-full">
                 <div  v-if="lists.length > 0"> 
                     <div class="grid grid-cols-1  gap-4">
