@@ -25,7 +25,7 @@
                 <button type="button" @click="login" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">确认</button>
                 <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                     没有账号? 前往 <NuxtLink to="/register" class="text-blue-700 hover:underline dark:text-blue-500">注册</NuxtLink>
-                </div>
+                </div>  
             </form>
         </div>
     </div>
@@ -35,6 +35,7 @@
     import { ref } from 'vue';
     import { encrypt, decrypt } from '@/utils/crypto'; 
     import { useUserStore } from '~~/stores/useUserStore'
+    import { success,warning } from '@/utils/tools';
 
     const isRememberMeChecked = ref(false)
     const store = useUserStore();
@@ -54,10 +55,10 @@
     });
 
     const formData = reactive({
-        username:'zhagsan123',
-        password:'zhagsan123'
+        username:'',
+        password:''
     })
-
+//zhagsan123
     const isSubmitting = ref(false);
     
     const clearError = (field) => {
@@ -100,23 +101,15 @@
     const login = async () => {
         isSubmitting.value = true;
         if(!formData.username){
-            errors.username = "请输入密码"
+            errors.username = "请输入用户名"
+            return
         }
 
         if(!formData.password){
             errors.password = "请输入密码"
+            return 
         }
-
-        if(isRememberMeChecked.value){
-            store.username = formData.username
-            store.password = encrypt(formData.password) 
-            store.rememberMe = true
-        }else{
-            store.username = ''
-            store.password = ''
-            store.rememberMe = false
-        }
-
+        
         const arr = {
             account: formData.username,
             password: formData.password
@@ -126,20 +119,23 @@
         if(res.code === 1) {
             store.userinfo = res.data
             store.token = res.data.token
+            if(isRememberMeChecked.value){
+                store.username = formData.username
+                store.password = encrypt(formData.password) 
+                store.rememberMe = true
+            }else{
+                store.username = ''
+                store.password = ''
+                store.rememberMe = false
+            }
+
             if(process.client){
                 router.push('/')
             }
       
         }else{
-            alert("error")
+            warning(res.msg)
         }
-        // const getCommentList = async () => {
-        //     let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
-        // }
-
-        // let { data } = await useFetch("/dsiab.com/getList", { method: "post", body: { postId: 2123123 } })
-        // console.log("res", res.data.token)
-        // console.log("res", isRememberMeChecked.value)
     };
 
   </script>

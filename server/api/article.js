@@ -9,7 +9,7 @@ export default new class Article extends Http {
     lists(params) {
         return this.get('/api/article/lists', params)
     }
-
+    
     detail(params) {
         return this.get('/api/article/commentsDetail', params)
     }

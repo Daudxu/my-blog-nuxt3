@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   },
   plugins: [ { src:'@/plugins/baidu',mode:'client' }],
   devtools: {
-    enabled: true,
+    enabled: false,
   },
   buildModules: [
     // 其他模块

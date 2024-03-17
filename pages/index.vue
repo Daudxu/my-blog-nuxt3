@@ -1,34 +1,34 @@
 <template>
 	<div class="w-full h-full">
-		<div class="sections-menu fixed top-[35%] right-7 transform translate-y-1/2">
-			<span class="menu-point w-3 h-3 bg-white block my-4 opacity-60 transition duration-400 ease-in-out cursor-pointer" v-bind:class="{active: activeSection == index}" v-on:click="scrollToSection(index)" v-for="(offset, index) in offsets" v-bind:key="index" >
-			</span>
-		</div>
+    <!-- about start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col overflow-hidden">
+             <!-- 引入about子组件 -->
             <about-section :homeData="homeData"></about-section>
 		</section>
+    <!-- about end -->
+    <!-- skills start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col relative bg-02">
         <div class="container mx-auto p-4">
             <div class="grid xs:grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- -------------------------------------- -->
                 <div class="p-4">
-                  <img :src="homeData.skills_image" class="rounded-2xl" />
+                  <img src="~/assets/images/page2.gif" class="rounded-2xl" />
                 </div>
                 <div class="flex items-center justify-center"> 
                   <div class="space-y-3">
                       <h1 class="text-2xl font-sans font-bold">🛠 技术栈 | Tech Stack </h1>
                       <ul class="space-y-3 w-full">
                         <li class="flex items-center flex-row flex-wrap" v-for="(item, index) in homeData.group_skills" :key="index"> 
-                          <div class="md:text-2xl">{{ item.icon }}</div>
+                          <div class="md:text-2xl">{{ item.name }}：</div>
                           <img v-for="(row, idx) in item.skills" :src="row.badge"  :key="idx" class="m-2 rounded-lg hover:shadow-xl h-5 md:h-7" />
                         </li>
                       </ul>
                     </div>
                 </div>
-                 <!-- -------------------------------------- -->
             </div>
        </div>
 		</section>
+    <!-- skills end -->
+    <!-- projects start -->
 		<section class="h-screen w-full flex justify-center items-center flex-col bg-03">
       <h1 class="py-7 text-2xl font-sans font-bold">项目展示</h1>
       <div>
@@ -45,31 +45,23 @@
         </div>
       </div>
 		</section>
-		<!-- <section class="h-screen w-full flex justify-center items-center flex-col">
-        <laboratory></laboratory>
-		</section> -->
+    <!-- projects end -->
 	</div>
   </template>
   
   <script setup>  
-  // import { useAppStore } from '~~/stores/useAppStore';
+  // 引入AboutSection 子组件
   import AboutSection from '~~/pages/components/AboutSection'
-  import Laboratory from '~~/pages/components/Laboratory'
-
+  // 加载布局配置
   definePageMeta({
     layout: 'no-footer',
   });
-
+  // 引入接口
   const { appApi } = useApi()
-  // const store = useAppStore();
-
-	const inMove = ref(false)
-  const inMoveDelay =  ref(400)
-	const activeSection = ref(0)
-	const offsets = ref([])
-  const touchStartY = ref(0)
+ //  初始化一个响应式首页数据对象,默认为空
   const homeData = ref('')
 
+  // 设置SEO关键词
   useHead({
     title: 'Dan blog ',
     meta: [
@@ -78,153 +70,16 @@
     ]
   })
 
-
-	const calculateSectionOffsets = () => {
-      let sections = document.getElementsByTagName('section');
-      let length = sections.length;
-      
-      for(let i = 0; i < length; i++) {
-        let sectionOffset = sections[i].offsetTop;
-        offsets.value.push(sectionOffset);
-      }
-    }
-  
-	 const handleMouseWheel = (e) => {
-      
-      if (e.wheelDelta < 30 && !inMove.value) {
-        moveUp();
-      } else if (e.wheelDelta > 30 && !inMove.value) {
-        moveDown();
-      }
-        
-      e.preventDefault();
-      return false;
-    }
-   
-    const handleMouseWheelDOM = (e) => {
-      
-      if (e.detail > 0 && !inMove.value) {
-        moveUp();
-      } else if (e.detail < 0 && !inMove.value) {
-        moveDown();
-      }
-      
-      return false;
-    }
-    
-	 const moveDown = () => {
-
-        inMove.value = true;
-        
-        activeSection.value--;
-          
-        if(activeSection.value < 0) activeSection.value = offsets.value.length - 1;
-          
-        scrollToSection(activeSection.value, true);
-
-    }
-    
-	 const moveUp = () => {
-
-        inMove.value = true;
-
-        activeSection.value++;
-          
-        if(activeSection.value > offsets.value.length - 1) activeSection.value = 0;
-          
-        scrollToSection(activeSection.value, true);
-
-    }
-
-	 const scrollToSection = (id, force = false) => {
-    
-      if(inMove.value && !force) return false;
-      
-      activeSection.value = id;
-
-      inMove.value = true;
-      
-      let section = document.getElementsByTagName('section')[id];
-
-      if(section) {
-
-        document.getElementsByTagName('section')[id].scrollIntoView({behavior: 'smooth'});
-        
-      }
-      
-      setTimeout(() => {
-
-        inMove.value = false;
-        
-      }, inMoveDelay.value);
-      
-  }
-
-    const touchStart = (e) => {
-      
-      e.preventDefault();
-      
-      touchStartY.value = e.touches[0].clientY;
-    }
-
-    const touchMove = (e) => {
-      if(inMove.value) return false;
-      e.preventDefault();
-      
-      const currentY = e.touches[0].clientY;
-      
-      if(touchStartY.value < currentY) {
-        moveDown();
-      } else {
-        moveUp();
-      }
-      
-      touchStartY.value = 0;
-      return false;
-  }
-
-	onMounted( async () => {
-		calculateSectionOffsets();
-		window.addEventListener('DOMMouseScroll', handleMouseWheelDOM);
-		window.addEventListener('mousewheel', handleMouseWheel, { passive: false });
-		window.addEventListener('touchstart', touchStart, { passive: false });
-		window.addEventListener('touchmove', touchMove, { passive: false });
-
-    const resHomeData = await appApi.getHomeData()
-    homeData.value = resHomeData.data
-	})
-
-	onBeforeUnmount(() => {
-		window.removeEventListener('DOMMouseScroll', handleMouseWheelDOM);
-		window.removeEventListener('mousewheel', handleMouseWheel, { passive: false });
-		window.removeEventListener('touchstart', touchStart);
-		window.removeEventListener('touchmove', touchMove);
-	})
-
-
+  // 调用接口获取首页数据
   const { data, pending, error, refresh } = await useAsyncData( () => appApi.getHomeData())
+  // 将获取到的数据赋值给
   homeData.value = data.value.data
 
   </script>
   
   <style scoped>
-  body {
-    overflow-x: hidden;
-  }
-	.sections-menu .menu-point.active {
-		opacity: 1;
-		transform: scale(1.2);
-	}
 
-	.sections-menu .menu-point:hover {
-		opacity: 1;
-		transform: scale(1.1);
-	}
-
-  /* .bg-01 {
-    background: url('../assets/images/h-bg.jpg') no-repeat;
-    background-size: cover;
-  } */
+  
   .bg-02 {
     background: url('../assets/images/page2.jpg') no-repeat;
     background-size: cover;

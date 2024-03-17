@@ -3,7 +3,7 @@
 
         <!-- ================================================= -->
         <div v-if="loading">
-            <el-skeleton :loading="loading" animated>
+                <el-skeleton :loading="loading" animated>
                     <template #template>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                             <el-skeleton-item variant="image" style="height: 240px" v-for="i in  7"  class="rounded-lg shadow-lg cursor-pointer"/>
@@ -16,7 +16,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         <el-image
                             v-for="(item, index) in lists" :key="index" :alt="item.title"
-                            class="rounded-lg shadow-lg cursor-pointer"
+                            class="rounded-lg shadow-lg cursor-pointer md:h-[160px]"
                             :src="item.image" 
                             lazy
                             :zoom-rate="1.2"

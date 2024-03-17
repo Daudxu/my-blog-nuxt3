@@ -74,7 +74,6 @@
  
  const menuList = ref([
     {name: "首页", 'path':"/"},
-    {name: "随心说", path:"/poster"},
     {name: "文章", path:"/article"},
     {name: "相册", path:"/albums"},
     {name: "项目", path:"/projects"},
